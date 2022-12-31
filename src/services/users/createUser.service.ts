@@ -1,6 +1,6 @@
-import { userRepository } from "../repositories/user.repository";
-import { IUser } from "../interfaces/user.interface";
-import { User } from "../entities/user.entity";
+import { userRepository } from "../../repositories/user.repository";
+import { IUser } from "../../interfaces/user.interface";
+import { User } from "../../entities/user.entity";
 import { hash } from "bcrypt";
 
 const createUserService = async (user: IUser): Promise<User> => {
