@@ -7,7 +7,9 @@ const deactivateUserService = async (user_id: string): Promise<void> => {
     throw new Error("User not found");
   }
 
-  userRepository.delete(user.id);
+  user.is_active = false;
+
+  await userRepository.save(user);
 };
 
 export { deactivateUserService };

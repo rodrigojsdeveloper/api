@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
 } from "typeorm";
+import { Schedule } from "./schedule.entity";
 
 @Entity("users")
 class User {
@@ -31,6 +34,12 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.user, {
+    lazy: true,
+  })
+  @JoinColumn()
+  schedules: Array<Schedule>;
 }
 
 export { User };
