@@ -10,9 +10,9 @@ const schemaValidationMiddleware =
       const validatedData = await schema.validate(data);
 
       req.body = validatedData;
-    } catch (error: any) {
-      console.log(error);
 
+      next();
+    } catch (error: any) {
       return res.status(400).json({ message: error.errors?.join(", ") });
     }
   };

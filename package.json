@@ -6,7 +6,7 @@
   "author": "Rodrigodeveloperjr <rodrigojsdeveloper@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./src/server.ts",
+    "dev": "ts-node-dev ./src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
@@ -15,7 +15,8 @@
     "@types/node": "^18.11.18",
     "@types/nodemon": "^1.19.2",
     "nodemon": "^2.0.20",
-    "sucrase": "^3.29.0"
+    "sucrase": "^3.29.0",
+    "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
