@@ -1,6 +1,6 @@
 import { userRepository } from "../../repositories/user.repository";
 import { iLogin } from "../../interfaces/login.interface";
-import jwt from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 import { hash } from "bcrypt";
 
 const loginService = async (user: iLogin): Promise<{ token: string }> => {
@@ -16,7 +16,7 @@ const loginService = async (user: iLogin): Promise<{ token: string }> => {
     throw new Error("Invalid credentials");
   }
 
-  const token = jwt.sign(
+  const token = sign(
     { email: findUser.email },
     process.env.SECRET_KET as string,
     { subject: findUser.id }
