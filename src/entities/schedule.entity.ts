@@ -6,7 +6,7 @@ import {
   ManyToOne,
   JoinTable,
 } from "typeorm";
-import { User } from "./user.entity";
+import { Property } from "./property.entity";
 
 @Entity("schedules")
 class Schedule {
@@ -22,11 +22,11 @@ class Schedule {
   @CreateDateColumn()
   readonly created_at: Date;
 
-  @ManyToOne(() => User, {
+  @ManyToOne(() => Property, {
     lazy: true,
   })
   @JoinTable()
-  user: User;
+  property: Property;
 }
 
 export { Schedule };

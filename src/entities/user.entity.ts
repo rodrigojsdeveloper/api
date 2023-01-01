@@ -5,9 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
-  JoinColumn,
 } from "typeorm";
-import { Schedule } from "./schedule.entity";
+import { Property } from "./property.entity";
 
 @Entity("users")
 class User {
@@ -35,11 +34,10 @@ class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.user, {
+  @OneToMany(() => Property, (property) => property.user, {
     lazy: true,
   })
-  @JoinColumn()
-  schedules: Array<Schedule>;
+  schedules: Array<Property>;
 }
 
 export { User };
