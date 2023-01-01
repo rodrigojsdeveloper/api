@@ -1,5 +1,8 @@
 import { ISchedule } from "../../interfaces/schedule.interface";
-import { IProperty } from "../../interfaces/property.interface";
+import {
+  IProperty,
+  IPropertyUpdate,
+} from "../../interfaces/property.interface";
 import { ILogin } from "../../interfaces/login.interface";
 import { IUser } from "../../interfaces/user.interface";
 
@@ -29,12 +32,24 @@ const loginNotAdm: ILogin = {
 
 const schedule: ISchedule = {
   date: "02/01/2023",
-  hour: "12:09"
+  hour: "12:09",
 };
 
 const property: IProperty = {
   size: 1000,
-  value: 20000
-}
+  value: 20000,
+};
 
-export { userAdm, userNotAdm, loginAdm, loginNotAdm, schedule, property };
+const updatedProperty: IPropertyUpdate = {
+  value: 10000,
+};
+
+export {
+  userAdm,
+  userNotAdm,
+  loginAdm,
+  loginNotAdm,
+  schedule,
+  property,
+  updatedProperty,
+};
