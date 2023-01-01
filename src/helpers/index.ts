@@ -14,10 +14,16 @@ class BadRequestError extends ApiError {
   }
 }
 
+class UnauthorizedError extends ApiError {
+  constructor(message: string) {
+    super(message, 401);
+  }
+}
+
 class NotFoundError extends ApiError {
   constructor(message: string) {
     super(`${message} not found`, 404);
   }
 }
 
-export { ApiError, BadRequestError, NotFoundError };
+export { ApiError, BadRequestError, UnauthorizedError, NotFoundError };

@@ -1,3 +1,4 @@
+import { iLogin } from "../../interfaces/login.interface";
 import { IUser } from "../../interfaces/user.interface";
 
 const userAdm: IUser = {
@@ -14,4 +15,14 @@ const userNotAdm: IUser = {
   is_adm: false,
 };
 
-export { userAdm, userNotAdm };
+const loginAdm: iLogin = {
+  email: "johndoe@org.com",
+  password: "johndoe@123",
+};
+
+const loginNotAdm: iLogin = {
+  email: "example@org.com",
+  password: "example@123",
+};
+
+export { userAdm, userNotAdm, loginAdm, loginNotAdm };
