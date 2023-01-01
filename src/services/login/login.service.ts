@@ -1,10 +1,10 @@
 import { userRepository } from "../../repositories/user.repository";
-import { iLogin } from "../../interfaces/login.interface";
+import { ILogin } from "../../interfaces/login.interface";
 import { UnauthorizedError } from "../../helpers";
 import { sign } from "jsonwebtoken";
 import { hash } from "bcrypt";
 
-const loginService = async (user: iLogin): Promise<{ token: string }> => {
+const loginService = async (user: ILogin): Promise<{ token: string }> => {
   const findUser = await userRepository.findOneBy({ email: user.email });
 
   if (!findUser) {

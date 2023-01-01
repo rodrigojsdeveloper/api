@@ -1,4 +1,6 @@
-import { iLogin } from "../../interfaces/login.interface";
+import { ISchedule } from "../../interfaces/schedule.interface";
+import { IProperty } from "../../interfaces/property.interface";
+import { ILogin } from "../../interfaces/login.interface";
 import { IUser } from "../../interfaces/user.interface";
 
 const userAdm: IUser = {
@@ -15,14 +17,24 @@ const userNotAdm: IUser = {
   is_adm: false,
 };
 
-const loginAdm: iLogin = {
+const loginAdm: ILogin = {
   email: "johndoe@org.com",
   password: "johndoe@123",
 };
 
-const loginNotAdm: iLogin = {
+const loginNotAdm: ILogin = {
   email: "example@org.com",
   password: "example@123",
 };
 
-export { userAdm, userNotAdm, loginAdm, loginNotAdm };
+const schedule: ISchedule = {
+  date: "02/01/2023",
+  hour: "12:09"
+};
+
+const property: IProperty = {
+  size: 1000,
+  value: 20000
+}
+
+export { userAdm, userNotAdm, loginAdm, loginNotAdm, schedule, property };

@@ -1,6 +1,6 @@
-interface iLogin {
+interface ILogin {
   email: string;
   password: string;
 }
 
-export { iLogin };
+export { ILogin };

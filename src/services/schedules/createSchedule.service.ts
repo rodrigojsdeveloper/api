@@ -1,14 +1,14 @@
 import { scheduleRepository } from "../../repositories/schedule.repository";
-import { userRepository } from "../../repositories/user.repository";
+import { propertyRepository } from "../../repositories/property.repository";
 import { ISchedule } from "../../interfaces/schedule.interface";
 import { Schedule } from "../../entities/schedule.entity";
 import { BadRequestError } from "../../helpers";
 
 const createScheduleService = async (
   schedule: ISchedule,
-  email: string
+  property_id: string
 ): Promise<Schedule> => {
-  const user = await userRepository.findOneBy({ email });
+  const property = await propertyRepository.findOneBy({ id: property_id });
 
   const newDate = new Date(schedule.date.split("/").reverse().join("-"));
   const newHour = Number(schedule.hour.split(":")[0]);
@@ -32,7 +32,7 @@ const createScheduleService = async (
   const newSchedule = new Schedule();
   newSchedule.date = schedule.date;
   newSchedule.hour = schedule.hour;
-  newSchedule.user = user!;
+  newSchedule.property = property!;
 
   scheduleRepository.create(newSchedule);
   await scheduleRepository.save(newSchedule);
