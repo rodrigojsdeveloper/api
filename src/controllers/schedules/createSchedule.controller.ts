@@ -3,9 +3,9 @@ import { ISchedule } from "../../interfaces/schedule.interface";
 import { Request, Response } from "express";
 
 const createScheduleController = async (req: Request, res: Response) => {
-  const schedule: ISchedule = req.body;
+  const data: ISchedule = req.body;
 
-  const newSchedule = await createScheduleService(schedule);
+  const newSchedule = await createScheduleService(data);
 
   return res.status(201).json(newSchedule);
 };

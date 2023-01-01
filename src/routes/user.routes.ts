@@ -11,7 +11,7 @@ import { userSchema } from "../schemas/user.schema";
 const routes = Router();
 
 const usersRoutes = (): Router => {
-  routes.post("", schemaValidationMiddleware(userSchema), createUserController);
+  routes.post("/signup", schemaValidationMiddleware(userSchema), createUserController);
 
   routes.get("/:id", userSchedulesController)
 
