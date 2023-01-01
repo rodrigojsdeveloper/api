@@ -1,10 +1,10 @@
 import { userRepository } from "../../repositories/user.repository";
-import { Schedule } from "../../entities/schedule.entity";
+import { Property } from "../../entities/property.entity";
 import { NotFoundError } from "../../helpers";
 
-const userSchedulesService = async (
+const allUserSchedulesService = async (
   user_id: string
-): Promise<Array<Schedule>> => {
+): Promise<Array<Property>> => {
   const user = await userRepository.findOne({
     where: { id: user_id },
     relations: ["schedules"],
@@ -14,7 +14,7 @@ const userSchedulesService = async (
     throw new NotFoundError("User");
   }
 
-  return user.schedules;
+  return user.properties;
 };
 
-export { userSchedulesService };
+export { allUserSchedulesService };

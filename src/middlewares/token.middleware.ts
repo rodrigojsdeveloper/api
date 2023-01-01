@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-const tokenMiddleware = async (
+const tokenMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction

@@ -37,7 +37,7 @@ class User {
   @OneToMany(() => Property, (property) => property.user, {
     lazy: true,
   })
-  schedules: Array<Property>;
+  properties: Array<Property>;
 }
 
 export { User };
