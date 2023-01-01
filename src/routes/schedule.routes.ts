@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { specificScheduleController } from "../controllers/schedules/specificSchedule.controller";
 import { createScheduleController } from "../controllers/schedules/createSchedule.controller";
 import { deleteScheduleController } from "../controllers/schedules/deleteSchedule.controller";
 
@@ -18,6 +19,9 @@ const schedulesRoutes = (): Router => {
   );
 
   routes.delete("/:id", tokenMiddleware, deleteScheduleController);
+
+  routes.get("/:id", tokenMiddleware, specificScheduleController);
+
   return routes;
 };
 

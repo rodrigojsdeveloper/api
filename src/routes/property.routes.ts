@@ -9,6 +9,7 @@ import { propertySaleController } from "../controllers/properties/propertySale.c
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 
 import { tokenMiddleware } from "../middlewares/token.middleware";
+import { isAdmMiddleware } from "../middlewares/isAdm.middleware";
 
 import { propertySchema } from "../schemas/property.schema";
 
@@ -19,16 +20,27 @@ const propertiesRoutes = () => {
     "",
     schemaValidationMiddleware(propertySchema),
     tokenMiddleware,
+    isAdmMiddleware,
     createPropertyController
   );
 
   routes.get("", tokenMiddleware, listAllPropertiesController);
 
-  routes.patch("/:id", tokenMiddleware, updatePropertyController);
+  routes.patch(
+    "/:id",
+    tokenMiddleware,
+    isAdmMiddleware,
+    updatePropertyController
+  );
 
   routes.get("/:id", tokenMiddleware, specificPropertyController);
 
-  routes.delete("/:id", tokenMiddleware, deletePropertyController);
+  routes.delete(
+    "/:id",
+    tokenMiddleware,
+    isAdmMiddleware,
+    deletePropertyController
+  );
 
   routes.post("/:id", tokenMiddleware, propertySaleController);
 

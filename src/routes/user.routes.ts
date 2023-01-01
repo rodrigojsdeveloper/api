@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { allUserSchedulesController } from "../controllers/users/userSchedules.controller";
+import { allUserSchedulesController } from "../controllers/users/allUserSchedules.controller";
 import { deactivateUserController } from "../controllers/users/deactivateUser.controller";
 import { createUserController } from "../controllers/users/createUser.controller";
 
