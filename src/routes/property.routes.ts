@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { listAllPropertiesController } from "../controllers/properties/listAllProperties.controller";
 import { createPropertyController } from "../controllers/properties/createProperty.controller";
+import { updatePropertyController } from "../controllers/properties/updateProperty.controller";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 
 import { tokenMiddleware } from "../middlewares/token.middleware";
@@ -18,7 +19,9 @@ const propertiesRoutes = () => {
     createPropertyController
   );
 
-  routes.get("", listAllPropertiesController);
+  routes.get("", tokenMiddleware, listAllPropertiesController);
+
+  routes.patch("/:id", tokenMiddleware, updatePropertyController);
 
   return routes;
 };
