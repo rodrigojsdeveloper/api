@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { listAllPropertiesController } from "../controllers/properties/listAllProperties.controller";
 import { createPropertyController } from "../controllers/properties/createProperty.controller";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 
@@ -16,6 +17,8 @@ const propertiesRoutes = () => {
     tokenMiddleware,
     createPropertyController
   );
+
+  routes.get("", listAllPropertiesController);
 
   return routes;
 };
