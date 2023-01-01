@@ -25,6 +25,6 @@ describe("Tests for property service", () => {
 
     const result = await propertySaleService(createProperty.id);
 
-    expect(result).toBeUndefined();
+    expect(result).toHaveProperty("message");
   });
 });

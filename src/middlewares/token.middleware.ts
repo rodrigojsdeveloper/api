@@ -8,7 +8,7 @@ const tokenMiddleware = (
 ) => {
   const token = req.headers.authorization;
 
-  if (!token || !token.includes("Bearer ")) {
+  if (!token || !token.includes("Bearer")) {
     return res.status(401).json({ message: "Invalid token" });
   }
 

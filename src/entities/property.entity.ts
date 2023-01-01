@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { Schedule } from "./schedule.entity";
 import { User } from "./user.entity";
@@ -31,13 +32,12 @@ class Property {
   updated_at: Date;
 
   @OneToMany(() => Schedule, (schedule) => schedule.property, {
-    lazy: true,
+    eager: true,
   })
   schedules: Array<Schedule>;
 
-  @ManyToOne(() => User, {
-    lazy: true,
-  })
+  @ManyToOne(() => User, user => user.properties)
+  @JoinColumn({ name: "user_id" })
   user: User;
 }
 

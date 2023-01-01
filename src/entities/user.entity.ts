@@ -35,7 +35,7 @@ class User {
   updated_at: Date;
 
   @OneToMany(() => Property, (property) => property.user, {
-    lazy: true,
+    eager: true,
   })
   properties: Array<Property>;
 }

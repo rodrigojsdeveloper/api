@@ -2,7 +2,7 @@ import { userRepository } from "../../repositories/user.repository";
 import { ILogin } from "../../interfaces/login.interface";
 import { UnauthorizedError } from "../../helpers";
 import { sign } from "jsonwebtoken";
-import { hash } from "bcrypt";
+import { compare } from "bcrypt";
 
 const loginService = async (user: ILogin): Promise<{ token: string }> => {
   const findUser = await userRepository.findOneBy({ email: user.email });
@@ -11,7 +11,7 @@ const loginService = async (user: ILogin): Promise<{ token: string }> => {
     throw new UnauthorizedError("Invalid credentials");
   }
 
-  const passwordMatch = await hash(user.password, findUser.password);
+  const passwordMatch = await compare(user.password, findUser.password);
 
   if (!passwordMatch) {
     throw new UnauthorizedError("Invalid credentials");
@@ -20,7 +20,7 @@ const loginService = async (user: ILogin): Promise<{ token: string }> => {
   const token = sign(
     { email: findUser.email },
     process.env.SECRET_KEY as string,
-    { subject: findUser.id }
+    { expiresIn: "24h", subject: findUser.id }
   );
 
   return { token };

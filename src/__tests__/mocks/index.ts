@@ -9,25 +9,25 @@ import { IUser } from "../../interfaces/user.interface";
 const userAdm: IUser = {
   name: "johndoe",
   email: "johndoe@org.com",
-  password: "johndoe@123",
+  password: "Johndoe@123",
   is_adm: true,
 };
 
 const userNotAdm: IUser = {
   name: "example",
   email: "example@org.com",
-  password: "example@123",
+  password: "Example@123",
   is_adm: false,
 };
 
 const loginAdm: ILogin = {
   email: "johndoe@org.com",
-  password: "johndoe@123",
+  password: "Johndoe@123",
 };
 
 const loginNotAdm: ILogin = {
   email: "example@org.com",
-  password: "example@123",
+  password: "Example@123",
 };
 
 const schedule: ISchedule = {

@@ -4,7 +4,7 @@ import {
   Column,
   CreateDateColumn,
   ManyToOne,
-  JoinTable,
+  JoinColumn,
 } from "typeorm";
 import { Property } from "./property.entity";
 
@@ -22,10 +22,8 @@ class Schedule {
   @CreateDateColumn()
   readonly created_at: Date;
 
-  @ManyToOne(() => Property, {
-    lazy: true,
-  })
-  @JoinTable()
+  @ManyToOne(() => Property, property => property.schedules)
+  @JoinColumn({ name: "property_id" })
   property: Property;
 }
 
