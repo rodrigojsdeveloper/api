@@ -16,7 +16,7 @@ const createUserService = async (user: IUser): Promise<User> => {
   newUser.email = user.email;
   newUser.password = hashedPassword;
   newUser.is_adm = user.is_adm;
-  newUser.schedules = [];
+  newUser.properties = [];
 
   userRepository.create(newUser);
   await userRepository.save(newUser);

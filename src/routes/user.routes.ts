@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { allUserSchedulesController } from "../controllers/users/allUserSchedules.controller";
+import { allUserPropertiesController } from "../controllers/users/allUserProperties.controller";
 import { deactivateUserController } from "../controllers/users/deactivateUser.controller";
 import { createUserController } from "../controllers/users/createUser.controller";
 
@@ -13,7 +13,7 @@ const routes = Router();
 const usersRoutes = (): Router => {
   routes.post("/signup", schemaValidationMiddleware(userSchema), createUserController);
 
-  routes.get("/:id", allUserSchedulesController)
+  routes.get("/:id", allUserPropertiesController)
 
   routes.delete("/:id", deactivateUserController);
 
