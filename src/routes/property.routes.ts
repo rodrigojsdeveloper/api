@@ -5,6 +5,7 @@ import { specificPropertyController } from "../controllers/properties/specificPr
 import { createPropertyController } from "../controllers/properties/createProperty.controller";
 import { deletePropertyController } from "../controllers/properties/deleteProperty.controller";
 import { updatePropertyController } from "../controllers/properties/updateProperty.controller";
+import { propertySaleController } from "../controllers/properties/propertySale.controller";
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 
 import { tokenMiddleware } from "../middlewares/token.middleware";
@@ -28,6 +29,8 @@ const propertiesRoutes = () => {
   routes.get("/:id", tokenMiddleware, specificPropertyController);
 
   routes.delete("/:id", tokenMiddleware, deletePropertyController);
+
+  routes.post("/:id", tokenMiddleware, propertySaleController);
 
   return routes;
 };
