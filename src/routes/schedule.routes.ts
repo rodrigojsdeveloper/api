@@ -13,8 +13,9 @@ const routes = Router();
 
 const schedulesRoutes = (): Router => {
   routes.post(
-    "",
+    "/:id",
     schemaValidationMiddleware(scheduleSchema),
+    tokenMiddleware,
     createScheduleController
   );
 
