@@ -1,11 +1,6 @@
 import { Router } from "express";
 
-import { listAllPropertiesController } from "../controllers/properties/listAllProperties.controller";
-import { specificPropertyController } from "../controllers/properties/specificProperty.controller";
-import { createPropertyController } from "../controllers/properties/createProperty.controller";
-import { deletePropertyController } from "../controllers/properties/deleteProperty.controller";
-import { updatePropertyController } from "../controllers/properties/updateProperty.controller";
-import { propertySaleController } from "../controllers/properties/propertySale.controller";
+import { PropertiesControllers } from "../controllers/properties.controller";
 
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { tokenMiddleware } from "../middlewares/token.middleware";
@@ -21,28 +16,40 @@ const propertiesRoutes = () => {
     schemaValidationMiddleware(propertySchema),
     tokenMiddleware,
     isAdmMiddleware,
-    createPropertyController
+    new PropertiesControllers().createPropertyController
   );
 
-  routes.get("", tokenMiddleware, listAllPropertiesController);
+  routes.get(
+    "",
+    tokenMiddleware,
+    new PropertiesControllers().listAllPropertiesController
+  );
 
   routes.patch(
     "/:id",
     tokenMiddleware,
     isAdmMiddleware,
-    updatePropertyController
+    new PropertiesControllers().updatePropertyController
   );
 
-  routes.get("/:id", tokenMiddleware, specificPropertyController);
+  routes.get(
+    "/:id",
+    tokenMiddleware,
+    new PropertiesControllers().specificPropertyController
+  );
 
   routes.delete(
     "/:id",
     tokenMiddleware,
     isAdmMiddleware,
-    deletePropertyController
+    new PropertiesControllers().deletePropertyController
   );
 
-  routes.post("/:id", tokenMiddleware, propertySaleController);
+  routes.post(
+    "/:id",
+    tokenMiddleware,
+    new PropertiesControllers().propertySaleController
+  );
 
   return routes;
 };
