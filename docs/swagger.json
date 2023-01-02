@@ -495,6 +495,9 @@
                   },
                   "updated_at": {
                       "type": "Date"
+                  },
+                  "properties": {
+                    "type": "Array"
                   }
               }
           },
@@ -518,6 +521,13 @@
                   },
                   "updated_at": {
                       "type": "Date"
+                  },
+                  "schedules": {
+                    "type": "Array"
+                  },
+                  "user": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Users"
                   }
               }
           },
@@ -535,6 +545,10 @@
                     },
                     "created_at": {
                         "type": "string"
+                    },
+                    "property": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Properties"
                     }
                 }
             },
