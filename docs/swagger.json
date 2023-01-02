@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-      "title": "NG.CASH API",
-      "description": "This API was created to use in the selection process of NG.CASH",
+      "title": "API",
+      "description": "This API is about creating properties and booking visits or buying",
       "termsOfService": "http://localhost:3000/terms",
       "contact": {
           "email": "rodrigojsdeveloper@gmail.com"
@@ -12,7 +12,7 @@
   "servers": [
       {
           "url": "http://localhost:3000",
-          "description": "NG.CASH API"
+          "description": "API"
       }
   ],
   "paths": {
@@ -491,10 +491,10 @@
                       "type": "boolean"
                   },
                   "created_at": {
-                      "type": "boolean"
+                      "type": "Date"
                   },
                   "updated_at": {
-                      "type": "boolean"
+                      "type": "Date"
                   }
               }
           },
