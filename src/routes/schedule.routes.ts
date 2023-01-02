@@ -1,8 +1,6 @@
 import { Router } from "express";
 
-import { specificScheduleController } from "../controllers/schedules/specificSchedule.controller";
-import { createScheduleController } from "../controllers/schedules/createSchedule.controller";
-import { deleteScheduleController } from "../controllers/schedules/deleteSchedule.controller";
+import { SchedulesControllers } from "../controllers/schedules.controller";
 
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { tokenMiddleware } from "../middlewares/token.middleware";
@@ -16,12 +14,20 @@ const schedulesRoutes = (): Router => {
     "/:id",
     schemaValidationMiddleware(scheduleSchema),
     tokenMiddleware,
-    createScheduleController
+    new SchedulesControllers().createScheduleController
   );
 
-  routes.delete("/:id", tokenMiddleware, deleteScheduleController);
+  routes.delete(
+    "/:id",
+    tokenMiddleware,
+    new SchedulesControllers().deleteScheduleController
+  );
 
-  routes.get("/:id", tokenMiddleware, specificScheduleController);
+  routes.get(
+    "/:id",
+    tokenMiddleware,
+    new SchedulesControllers().specificScheduleController
+  );
 
   return routes;
 };
