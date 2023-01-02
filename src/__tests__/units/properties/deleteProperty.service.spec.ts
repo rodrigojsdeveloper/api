@@ -2,7 +2,7 @@ import { createPropertyService } from "../../../services/properties/createProper
 import { deletePropertyService } from "../../../services/properties/deleteProperty.service";
 import { createUserService } from "../../../services/users/createUser.service";
 import { AppDataSource } from "../../../data-source";
-import { property, userAdm } from "../../mocks";
+import { property, userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for property service", () => {

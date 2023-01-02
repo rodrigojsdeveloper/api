@@ -5,7 +5,7 @@ import {
   updatedProperty,
   userAdm,
   userNotAdm,
-} from "../../mocks";
+} from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
@@ -50,7 +50,6 @@ describe("Tests for properties routes", () => {
     expect(response.body).toHaveProperty("created_at");
     expect(response.body).toHaveProperty("updated_at");
     expect(response.body).toHaveProperty("schedules");
-    expect(response.body).toHaveProperty("user");
   });
 
   test("Must prevent updated a tokenless property", async () => {

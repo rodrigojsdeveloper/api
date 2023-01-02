@@ -1,7 +1,7 @@
 import { createScheduleService } from "../../../services/schedules/createSchedule.service";
 import { createPropertyService } from "../../../services/properties/createProperty.service";
 import { createUserService } from "../../../services/users/createUser.service";
-import { property, schedule, userAdm } from "../../mocks";
+import { property, schedule, userAdm } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 

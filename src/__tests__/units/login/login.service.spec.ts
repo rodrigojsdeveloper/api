@@ -1,7 +1,7 @@
 import { createUserService } from "../../../services/users/createUser.service";
 import { loginService } from "../../../services/login/login.service";
 import { AppDataSource } from "../../../data-source";
-import { loginAdm, userAdm } from "../../mocks";
+import { loginAdm, userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for login service", () => {

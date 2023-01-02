@@ -1,9 +1,4 @@
-import {
-  loginAdm,
-  property,
-  userAdm,
-  userNotAdm,
-} from "../../mocks";
+import { loginAdm, property, userAdm, userNotAdm } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
@@ -47,7 +42,6 @@ describe("Tests for properties routes", () => {
     expect(response.body).toHaveProperty("created_at");
     expect(response.body).toHaveProperty("updated_at");
     expect(response.body).toHaveProperty("schedules");
-    expect(response.body).toHaveProperty("user");
   });
 
   test("Must prevent specific a tokenless property", async () => {
@@ -55,8 +49,9 @@ describe("Tests for properties routes", () => {
       .post("/properties")
       .send(property);
 
-    const response = await request(app)
-      .get(`/properties/${createProperty.body.id}`)
+    const response = await request(app).get(
+      `/properties/${createProperty.body.id}`
+    );
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");

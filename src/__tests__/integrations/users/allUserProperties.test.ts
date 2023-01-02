@@ -1,5 +1,5 @@
 import { AppDataSource } from "../../../data-source";
-import { userAdm } from "../../mocks";
+import { userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
 import request from "supertest";

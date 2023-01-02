@@ -1,4 +1,4 @@
-import { loginAdm, property, schedule, userAdm } from "../../mocks";
+import { loginAdm, property, schedule, userAdm } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
@@ -14,22 +14,29 @@ describe("Tests for schedules routes", () => {
         console.error("Error during DataSource initialization", err)
       );
 
-      await request(app).post("/users/signup").send(userAdm)
+    await request(app).post("/users/signup").send(userAdm);
   });
 
   afterAll(async () => await connection.destroy());
 
   test("Must be able to specific a schedule", async () => {
+    const login = await request(app).post("/signin").send(loginAdm);
 
-    const login = await request(app).post("/signin").send(loginAdm)
+    const token: string = login.body.token;
 
-    const token: string = login.body.token
+    const createProperty = await request(app)
+      .post("/properties")
+      .send(property)
+      .set("Authorization", `Bearer ${token}`);
 
-    const createProperty = await request(app).post("/properties").send(property).set("Authorization", `Bearer ${ token }`);
+    const createSchedule = await request(app)
+      .post(`/schedules/${createProperty.body.id}`)
+      .send(schedule)
+      .set("Authorization", `Bearer ${token}`);
 
-    const createSchedule = await request(app).post(`/schedules/${createProperty.body.id}`).send(schedule).set("Authorization", `Bearer ${ token }`)
-
-    const response = await request(app).get(`/schedules/${createSchedule.body.id}`).set("Authorization", `Bearer ${ token }`)
+    const response = await request(app)
+      .get(`/schedules/${createSchedule.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
 
@@ -41,31 +48,37 @@ describe("Tests for schedules routes", () => {
   });
 
   test("Must prevent specified a tokenless schedule", async () => {
+    const login = await request(app).post("/signin").send(loginAdm);
 
-    const login = await request(app).post("/signin").send(loginAdm)
+    const token: string = login.body.token;
 
-    const token: string = login.body.token
+    const createProperty = await request(app)
+      .post("/properties")
+      .send(property)
+      .set("Authorization", `Bearer ${token}`);
 
-    const createProperty = await request(app).post("/properties").send(property).set("Authorization", `Bearer ${ token }`);
+    const createSchedule = await request(app)
+      .post(`/schedules/${createProperty.body.id}`)
+      .send(schedule)
+      .set("Authorization", `Bearer ${token}`);
 
-    const createSchedule = await request(app).post(`/schedules/${createProperty.body.id}`).send(schedule).set("Authorization", `Bearer ${ token }`)
-    
-    const response = await request(app).get(`/schedules/${createSchedule.body.id}`)
+    const response = await request(app).get(
+      `/schedules/${createSchedule.body.id}`
+    );
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
   });
-  /*
+  
   test("Must prevent specified a schedule with invalid property id", async () => {
 
     const login = await request(app).post("/signin").send(loginAdm)
 
     const token: string = login.body.token
 
-    const response = await request(app).get("/schedules/05a429c8-ca25-4007-8854-25c25f734167").set("Authorization", `Bearer ${ token }`)
+    const response = await request(app).get("/schedules/67").set("Authorization", `Bearer ${ token }`)
 
     expect(response.status).toBe(404);
     expect(response.body).toHaveProperty("message");
   });
-  */
 });

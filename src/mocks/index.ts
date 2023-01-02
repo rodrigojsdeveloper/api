@@ -1,10 +1,7 @@
-import { ISchedule } from "../../interfaces/schedule.interface";
-import {
-  IProperty,
-  IPropertyUpdate,
-} from "../../interfaces/property.interface";
-import { ILogin } from "../../interfaces/login.interface";
-import { IUser } from "../../interfaces/user.interface";
+import { ISchedule } from "../interfaces/schedule.interface";
+import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
+import { ILogin } from "../interfaces/login.interface";
+import { IUser } from "../interfaces/user.interface";
 
 const userAdm: IUser = {
   name: "johndoe",

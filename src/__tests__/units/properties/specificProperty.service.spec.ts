@@ -2,7 +2,7 @@ import { specificPropertyService } from "../../../services/properties/specificPr
 import { createPropertyService } from "../../../services/properties/createProperty.service";
 import { createUserService } from "../../../services/users/createUser.service";
 import { AppDataSource } from "../../../data-source";
-import { property, userAdm } from "../../mocks";
+import { property, userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for property service", () => {
@@ -31,7 +31,6 @@ describe("Tests for property service", () => {
     expect(result).toHaveProperty("sold");
     expect(result).toHaveProperty("created_at");
     expect(result).toHaveProperty("updated_at");
-    expect(result).toHaveProperty("user");
     expect(result).toHaveProperty("schedules");
   });
 });

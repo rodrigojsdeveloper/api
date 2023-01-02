@@ -4,7 +4,7 @@ import {
   property,
   userAdm,
   userNotAdm,
-} from "../../mocks";
+} from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
@@ -48,8 +48,9 @@ describe("Tests for properties routes", () => {
       .post("/properties")
       .send(property);
 
-    const response = await request(app)
-      .post(`/properties/${createProperty.body.id}`)
+    const response = await request(app).post(
+      `/properties/${createProperty.body.id}`
+    );
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");

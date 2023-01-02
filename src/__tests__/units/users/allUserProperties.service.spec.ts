@@ -1,7 +1,7 @@
 import { allUserPropertiesService } from "../../../services/users/allUserProperties.service";
 import { createUserService } from "../../../services/users/createUser.service";
 import { AppDataSource } from "../../../data-source";
-import { userAdm } from "../../mocks";
+import { userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for user service", () => {

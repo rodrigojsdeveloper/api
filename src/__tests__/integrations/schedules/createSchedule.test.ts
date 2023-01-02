@@ -1,4 +1,4 @@
-import { loginAdm, property, schedule, userAdm } from "../../mocks";
+import { loginAdm, property, schedule, userAdm } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
