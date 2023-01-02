@@ -1,10 +1,8 @@
 import { Router } from "express";
 
-import { allUserPropertiesController } from "../controllers/users/allUserProperties.controller";
-import { deactivateUserController } from "../controllers/users/deactivateUser.controller";
-import { createUserController } from "../controllers/users/createUser.controller";
-
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
+
+import { UserController } from "../controllers/user.controller";
 
 import { userSchema } from "../schemas/user.schema";
 
@@ -14,12 +12,12 @@ const usersRoutes = (): Router => {
   routes.post(
     "/signup",
     schemaValidationMiddleware(userSchema),
-    createUserController
+    new UserController().createUserController
   );
 
-  routes.get("/:id", allUserPropertiesController);
+  routes.get("/:id", new UserController().listUserPropertiesController);
 
-  routes.delete("/:id", deactivateUserController);
+  routes.delete("/:id", new UserController().deactivateUserController);
 
   return routes;
 };
