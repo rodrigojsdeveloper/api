@@ -1,4 +1,4 @@
-import { createUserService } from "../../../services/users/createUser.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -17,7 +17,7 @@ describe("Tests for user service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to create a user", async () => {
-    const result = await createUserService(userAdm);
+    const result = await new UsersServices().create(userAdm);
 
     expect(result).toHaveProperty("id");
     expect(result).toHaveProperty("name");

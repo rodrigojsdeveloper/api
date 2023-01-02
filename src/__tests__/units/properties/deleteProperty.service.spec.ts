@@ -1,6 +1,5 @@
-import { createPropertyService } from "../../../services/properties/createProperty.service";
-import { deletePropertyService } from "../../../services/properties/deleteProperty.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { PropertiesServices } from "../../../services/properties.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { property, userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -19,11 +18,14 @@ describe("Tests for property service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to delete a property", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const createProperty = await createPropertyService(property, user.email);
+    const createProperty = await new PropertiesServices().create(
+      property,
+      user.email
+    );
 
-    const result = await deletePropertyService(createProperty.id);
+    const result = await new PropertiesServices().delete(createProperty.id);
 
     expect(result).toBeUndefined();
   });

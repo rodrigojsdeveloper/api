@@ -1,5 +1,4 @@
-import { allUserPropertiesService } from "../../../services/users/allUserProperties.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -18,9 +17,9 @@ describe("Tests for user service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to list user properties", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const result = await allUserPropertiesService(user.id);
+    const result = await new UsersServices().listProperties(user.id);
 
     expect(result).toHaveProperty("map");
   });

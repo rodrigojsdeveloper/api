@@ -1,5 +1,4 @@
-import { deactivateUserService } from "../../../services/users/deactivateUser.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -18,9 +17,9 @@ describe("Tests for user service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to deactive a user", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const result = await deactivateUserService(user.id);
+    const result = await new UsersServices().deactivate(user.id);
 
     expect(result).toBeUndefined();
   });

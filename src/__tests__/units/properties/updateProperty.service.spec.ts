@@ -1,7 +1,6 @@
-import { createPropertyService } from "../../../services/properties/createProperty.service";
-import { updatePropertyService } from "../../../services/properties/updateProperty.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { PropertiesServices } from "../../../services/properties.service";
 import { property, updatedProperty, userAdm } from "../../../mocks";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 
@@ -19,11 +18,14 @@ describe("Tests for property service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to update a property", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const createProperty = await createPropertyService(property, user.email);
+    const createProperty = await new PropertiesServices().create(
+      property,
+      user.email
+    );
 
-    const result = await updatePropertyService(
+    const result = await new PropertiesServices().update(
       updatedProperty,
       createProperty.id
     );

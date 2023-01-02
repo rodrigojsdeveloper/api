@@ -1,6 +1,5 @@
-import { specificPropertyService } from "../../../services/properties/specificProperty.service";
-import { createPropertyService } from "../../../services/properties/createProperty.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { PropertiesServices } from "../../../services/properties.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { property, userAdm } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -19,11 +18,14 @@ describe("Tests for property service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to specific a property", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const createProperty = await createPropertyService(property, user.email);
+    const createProperty = await new PropertiesServices().create(
+      property,
+      user.email
+    );
 
-    const result = await specificPropertyService(createProperty.id);
+    const result = await new PropertiesServices().specific(createProperty.id);
 
     expect(result).toHaveProperty("id");
     expect(result).toHaveProperty("size");

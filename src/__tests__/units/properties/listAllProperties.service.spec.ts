@@ -1,4 +1,4 @@
-import { listAllPropertiesService } from "../../../services/properties/listAllProperties.service";
+import { PropertiesServices } from "../../../services/properties.service";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 
@@ -16,7 +16,7 @@ describe("Tests for property service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to list properties", async () => {
-    const result = await listAllPropertiesService();
+    const result = await new PropertiesServices().list();
 
     expect(result).toHaveProperty("map");
   });

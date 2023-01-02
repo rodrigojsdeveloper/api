@@ -1,7 +1,6 @@
-import { specificScheduleService } from "../../../services/schedules/specificSchedule.service";
-import { createPropertyService } from "../../../services/properties/createProperty.service";
-import { createScheduleService } from "../../../services/schedules/createSchedule.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { PropertiesServices } from "../../../services/properties.service";
+import { SchedulesServices } from "../../../services/schedules.service";
+import { UsersServices } from "../../../services/users.service";
 import { property, schedule, userAdm } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
@@ -20,16 +19,19 @@ describe("Tests for schedule service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to specific schedule", async () => {
-    const user = await createUserService(userAdm);
+    const user = await new UsersServices().create(userAdm);
 
-    const createProperty = await createPropertyService(property, user.email);
+    const createProperty = await new PropertiesServices().create(
+      property,
+      user.email
+    );
 
-    const createSchedule = await createScheduleService(
+    const createSchedule = await new SchedulesServices().create(
       schedule,
       createProperty.id
     );
 
-    const result = await specificScheduleService(createSchedule.id);
+    const result = await new SchedulesServices().specific(createSchedule.id);
 
     expect(result).toHaveProperty("id");
     expect(result).toHaveProperty("date");
