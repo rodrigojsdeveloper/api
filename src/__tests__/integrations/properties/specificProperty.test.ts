@@ -44,7 +44,7 @@ describe("Tests for properties routes", () => {
     expect(response.body).toHaveProperty("schedules");
   });
 
-  test("Must prevent specific a tokenless property", async () => {
+  test("Must prevent specified a tokenless property", async () => {
     const createProperty = await request(app)
       .post("/properties")
       .send(property);

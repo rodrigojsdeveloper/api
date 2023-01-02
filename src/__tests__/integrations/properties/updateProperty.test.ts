@@ -52,7 +52,7 @@ describe("Tests for properties routes", () => {
     expect(response.body).toHaveProperty("schedules");
   });
 
-  test("Must prevent updated a tokenless property", async () => {
+  test("Must prevent updation a tokenless property", async () => {
     const createProperty = await request(app)
       .post("/properties")
       .send(property);
@@ -84,7 +84,7 @@ describe("Tests for properties routes", () => {
     expect(response.body).toHaveProperty("message");
   });
 
-  test("Must prevent updated a property with invalid id", async () => {
+  test("Must prevent updation a property with invalid id", async () => {
     const login = await request(app).post("/signin").send(loginAdm);
 
     const token: string = login.body.token;

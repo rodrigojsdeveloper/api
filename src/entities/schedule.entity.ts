@@ -22,7 +22,7 @@ class Schedule {
   @CreateDateColumn()
   readonly created_at: Date;
 
-  @ManyToOne(() => Property, property => property.schedules)
+  @ManyToOne(() => Property, (property) => property.schedules)
   @JoinColumn({ name: "property_id" })
   property: Property;
 }

@@ -1,6 +1,6 @@
 import { propertyRepository } from "../../repositories/property.repository";
+import { NotFoundError } from "../../errors/notFound.error";
 import { Property } from "../../entities/property.entity";
-import { NotFoundError } from "../../helpers";
 
 const specificPropertyService = async (
   property_id: string

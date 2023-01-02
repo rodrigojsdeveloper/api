@@ -36,7 +36,7 @@ class Property {
   })
   schedules: Array<Schedule>;
 
-  @ManyToOne(() => User, user => user.properties)
+  @ManyToOne(() => User, (user) => user.properties)
   @JoinColumn({ name: "user_id" })
   user: User;
 }

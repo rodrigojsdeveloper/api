@@ -41,7 +41,7 @@ describe("Tests for schedules routes", () => {
     expect(response.status).toBe(204);
   });
 
-  test("Must prevent deleted a tokenless schedule", async () => {
+  test("Must prevent deletion a tokenless schedule", async () => {
     const login = await request(app).post("/signin").send(loginAdm);
 
     const token: string = login.body.token;
@@ -64,7 +64,7 @@ describe("Tests for schedules routes", () => {
     expect(response.body).toHaveProperty("message");
   });
 
-  test("Must prevent deleted a schedule with invalid property id", async () => {
+  test("Must prevent deletion a schedule with invalid property id", async () => {
 
     const login = await request(app).post("/signin").send(loginAdm)
 

@@ -1,6 +1,6 @@
 import { userRepository } from "../../repositories/user.repository";
+import { NotFoundError } from "../../errors/notFound.error";
 import { Property } from "../../entities/property.entity";
-import { NotFoundError } from "../../helpers";
 
 const allUserPropertiesService = async (
   user_id: string

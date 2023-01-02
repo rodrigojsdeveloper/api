@@ -1,7 +1,7 @@
 import { userRepository } from "../../repositories/user.repository";
+import { BadRequestError } from "../../errors/badRequest.error";
 import { IUser } from "../../interfaces/user.interface";
 import { User } from "../../entities/user.entity";
-import { BadRequestError } from "../../helpers";
 import { hash } from "bcrypt";
 
 const createUserService = async (user: IUser): Promise<User> => {

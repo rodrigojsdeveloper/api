@@ -1,5 +1,5 @@
 import { scheduleRepository } from "../../repositories/schedule.repository";
-import { NotFoundError } from "../../helpers";
+import { NotFoundError } from "../../errors/notFound.error";
 
 const deleteScheduleService = async (schedule_id: number): Promise<void> => {
   const schedule = await scheduleRepository.findOneBy({ id: schedule_id });

@@ -18,7 +18,7 @@ describe("Tests for property service", () => {
 
   afterAll(async () => await connection.destroy());
 
-  it("Must be able to specific a property", async () => {
+  it("Must be able to update a property", async () => {
     const user = await createUserService(userAdm);
 
     const createProperty = await createPropertyService(property, user.email);

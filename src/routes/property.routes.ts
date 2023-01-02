@@ -6,8 +6,8 @@ import { createPropertyController } from "../controllers/properties/createProper
 import { deletePropertyController } from "../controllers/properties/deleteProperty.controller";
 import { updatePropertyController } from "../controllers/properties/updateProperty.controller";
 import { propertySaleController } from "../controllers/properties/propertySale.controller";
-import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 
+import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { tokenMiddleware } from "../middlewares/token.middleware";
 import { isAdmMiddleware } from "../middlewares/isAdm.middleware";
 

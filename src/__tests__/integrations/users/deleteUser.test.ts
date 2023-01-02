@@ -4,7 +4,7 @@ import { DataSource } from "typeorm";
 import { app } from "../../../app";
 import request from "supertest";
 
-describe("Tests for user routes", () => {
+describe("Tests for users routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {

@@ -1,5 +1,5 @@
 import { propertyRepository } from "../../repositories/property.repository";
-import { NotFoundError } from "../../helpers";
+import { NotFoundError } from "../../errors/notFound.error";
 
 const deletePropertyService = async (property_id: string): Promise<void> => {
   const property = await propertyRepository.findOneBy({ id: property_id });

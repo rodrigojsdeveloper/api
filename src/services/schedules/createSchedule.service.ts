@@ -1,8 +1,9 @@
 import { scheduleRepository } from "../../repositories/schedule.repository";
 import { propertyRepository } from "../../repositories/property.repository";
 import { ISchedule } from "../../interfaces/schedule.interface";
+import { BadRequestError } from "../../errors/badRequest.error";
+import { NotFoundError } from "../../errors/notFound.error";
 import { Schedule } from "../../entities/schedule.entity";
-import { BadRequestError, NotFoundError } from "../../helpers";
 
 const createScheduleService = async (
   schedule: ISchedule,

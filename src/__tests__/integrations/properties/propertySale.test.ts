@@ -1,6 +1,5 @@
 import {
   loginAdm,
-  loginNotAdm,
   property,
   userAdm,
   userNotAdm,

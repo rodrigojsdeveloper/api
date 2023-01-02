@@ -1,6 +1,6 @@
 import { scheduleRepository } from "../../repositories/schedule.repository";
+import { NotFoundError } from "../../errors/notFound.error";
 import { Schedule } from "../../entities/schedule.entity";
-import { NotFoundError } from "../../helpers";
 
 const specificScheduleService = async (
   schedule_id: number

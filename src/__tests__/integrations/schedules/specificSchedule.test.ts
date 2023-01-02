@@ -69,14 +69,15 @@ describe("Tests for schedules routes", () => {
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
   });
-  
+
   test("Must prevent specified a schedule with invalid property id", async () => {
+    const login = await request(app).post("/signin").send(loginAdm);
 
-    const login = await request(app).post("/signin").send(loginAdm)
+    const token: string = login.body.token;
 
-    const token: string = login.body.token
-
-    const response = await request(app).get("/schedules/67").set("Authorization", `Bearer ${ token }`)
+    const response = await request(app)
+      .get("/schedules/67")
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);
     expect(response.body).toHaveProperty("message");

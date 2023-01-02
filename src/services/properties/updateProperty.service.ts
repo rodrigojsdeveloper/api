@@ -1,7 +1,7 @@
 import { propertyRepository } from "../../repositories/property.repository";
 import { IPropertyUpdate } from "../../interfaces/property.interface";
+import { NotFoundError } from "../../errors/notFound.error";
 import { Property } from "../../entities/property.entity";
-import { NotFoundError } from "../../helpers";
 
 const updatePropertyService = async (
   property: IPropertyUpdate,
