@@ -5,10 +5,7 @@ import { NotFoundError } from "../errors/notFound.error";
 import { Property } from "../entities/property.entity";
 
 class PropertiesServices {
-  async createPropertyService(
-    property: IProperty,
-    email: string
-  ): Promise<Property> {
+  async create(property: IProperty, email: string): Promise<Property> {
     const user = await userRepository.findOneBy({ email });
 
     const newProperty = new Property();
@@ -23,7 +20,7 @@ class PropertiesServices {
     return newProperty;
   }
 
-  async listAllPropertiesService(): Promise<Array<Property>> {
+  async list(): Promise<Array<Property>> {
     const properties = await propertyRepository.find({
       relations: ["schedules", "user"],
     });
@@ -31,7 +28,7 @@ class PropertiesServices {
     return properties;
   }
 
-  async specificPropertyService(property_id: string): Promise<Property> {
+  async specific(property_id: string): Promise<Property> {
     const property = await propertyRepository.findOne({
       where: { id: property_id },
       relations: ["schedules", "user"],
@@ -44,7 +41,7 @@ class PropertiesServices {
     return property;
   }
 
-  async propertySaleService(property_id: string): Promise<{ message: string }> {
+  async sale(property_id: string): Promise<{ message: string }> {
     const property = await propertyRepository.findOneBy({ id: property_id });
 
     if (!property) {
@@ -56,7 +53,7 @@ class PropertiesServices {
     return { message: "Property sold" };
   }
 
-  async updatePropertyService(
+  async update(
     property: IPropertyUpdate,
     property_id: string
   ): Promise<Property> {
@@ -80,7 +77,7 @@ class PropertiesServices {
     return updatedProperty!;
   }
 
-  async deletePropertyService(property_id: string): Promise<void> {
+  async delete(property_id: string): Promise<void> {
     const property = await propertyRepository.findOneBy({ id: property_id });
 
     if (!property) {

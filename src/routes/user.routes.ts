@@ -12,12 +12,12 @@ const usersRoutes = (): Router => {
   routes.post(
     "/signup",
     schemaValidationMiddleware(userSchema),
-    new UsersControllers().createUserController
+    new UsersControllers().create
   );
 
-  routes.get("/:id", new UsersControllers().listUserPropertiesController);
+  routes.get("/:id", new UsersControllers().listProperties);
 
-  routes.delete("/:id", new UsersControllers().deactivateUserController);
+  routes.delete("/:id", new UsersControllers().deactivate);
 
   return routes;
 };

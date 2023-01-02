@@ -6,10 +6,7 @@ import { NotFoundError } from "../errors/notFound.error";
 import { Schedule } from "../entities/schedule.entity";
 
 class SchedulesServices {
-  async createScheduleService(
-    schedule: ISchedule,
-    property_id: string
-  ): Promise<Schedule> {
+  async create(schedule: ISchedule, property_id: string): Promise<Schedule> {
     const property = await propertyRepository.findOneBy({ id: property_id });
 
     if (!property) {
@@ -46,7 +43,7 @@ class SchedulesServices {
     return newSchedule;
   }
 
-  async specificScheduleService(schedule_id: number): Promise<Schedule> {
+  async specific(schedule_id: number): Promise<Schedule> {
     const schedule = await scheduleRepository.findOne({
       where: { id: schedule_id },
       relations: ["property"],
@@ -59,7 +56,7 @@ class SchedulesServices {
     return schedule;
   }
 
-  async deleteScheduleService(schedule_id: number): Promise<void> {
+  async delete(schedule_id: number): Promise<void> {
     const schedule = await scheduleRepository.findOneBy({ id: schedule_id });
 
     if (!schedule) {

@@ -14,20 +14,12 @@ const schedulesRoutes = (): Router => {
     "/:id",
     schemaValidationMiddleware(scheduleSchema),
     tokenMiddleware,
-    new SchedulesControllers().createScheduleController
+    new SchedulesControllers().create
   );
 
-  routes.delete(
-    "/:id",
-    tokenMiddleware,
-    new SchedulesControllers().deleteScheduleController
-  );
+  routes.delete("/:id", tokenMiddleware, new SchedulesControllers().delete);
 
-  routes.get(
-    "/:id",
-    tokenMiddleware,
-    new SchedulesControllers().specificScheduleController
-  );
+  routes.get("/:id", tokenMiddleware, new SchedulesControllers().specific);
 
   return routes;
 };

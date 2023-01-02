@@ -5,7 +5,7 @@ import { LoginControllers } from "../controllers/login.controller";
 const routes = Router();
 
 const loginRoutes = () => {
-  routes.post("", new LoginControllers().loginController);
+  routes.post("", new LoginControllers().create);
 
   return routes;
 };

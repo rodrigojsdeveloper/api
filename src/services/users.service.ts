@@ -7,7 +7,7 @@ import { User } from "../entities/user.entity";
 import { hash } from "bcrypt";
 
 class UsersServices {
-  async createUserService(user: IUser): Promise<User> {
+  async create(user: IUser): Promise<User> {
     if (await userRepository.findOneBy({ email: user.email })) {
       throw new BadRequestError("Email already exists");
     }
@@ -29,7 +29,7 @@ class UsersServices {
     return newUser;
   }
 
-  async allUserPropertiesService(user_id: string): Promise<Array<Property>> {
+  async listProperties(user_id: string): Promise<Array<Property>> {
     const user = await userRepository.findOne({
       where: { id: user_id },
       relations: ["properties"],
@@ -42,7 +42,7 @@ class UsersServices {
     return user.properties;
   }
 
-  async deactivateUserService(user_id: string): Promise<void> {
+  async deactivate(user_id: string): Promise<void> {
     const user = await userRepository.findOneBy({ id: user_id });
 
     if (!user) {

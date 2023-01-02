@@ -5,7 +5,7 @@ import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 
 class LoginServices {
-  async loginService(user: ILogin): Promise<{ token: string }> {
+  async create(user: ILogin): Promise<{ token: string }> {
     const findUser = await userRepository.findOneBy({ email: user.email });
 
     if (!findUser) {

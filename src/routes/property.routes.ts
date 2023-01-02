@@ -16,40 +16,28 @@ const propertiesRoutes = () => {
     schemaValidationMiddleware(propertySchema),
     tokenMiddleware,
     isAdmMiddleware,
-    new PropertiesControllers().createPropertyController
+    new PropertiesControllers().create
   );
 
-  routes.get(
-    "",
-    tokenMiddleware,
-    new PropertiesControllers().listAllPropertiesController
-  );
+  routes.get("", tokenMiddleware, new PropertiesControllers().list);
 
   routes.patch(
     "/:id",
     tokenMiddleware,
     isAdmMiddleware,
-    new PropertiesControllers().updatePropertyController
+    new PropertiesControllers().update
   );
 
-  routes.get(
-    "/:id",
-    tokenMiddleware,
-    new PropertiesControllers().specificPropertyController
-  );
+  routes.get("/:id", tokenMiddleware, new PropertiesControllers().specific);
 
   routes.delete(
     "/:id",
     tokenMiddleware,
     isAdmMiddleware,
-    new PropertiesControllers().deletePropertyController
+    new PropertiesControllers().delete
   );
 
-  routes.post(
-    "/:id",
-    tokenMiddleware,
-    new PropertiesControllers().propertySaleController
-  );
+  routes.post("/:id", tokenMiddleware, new PropertiesControllers().sale);
 
   return routes;
 };
