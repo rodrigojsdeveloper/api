@@ -1,7 +1,7 @@
-import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
 import { propertyRepository } from "../repositories/property.repository";
 import { addressRepository } from "../repositories/address.repository";
 import { userRepository } from "../repositories/user.repository";
+import { IProperty } from "../interfaces/property.interface";
 import { NotFoundError } from "../errors/notFound.error";
 import { Property } from "../entities/property.entity";
 
@@ -59,7 +59,7 @@ class PropertiesServices {
   }
 
   async update(
-    property: IPropertyUpdate,
+    property: Partial<IProperty>,
     property_id: string
   ): Promise<Property> {
     const findProperty = await propertyRepository.findOneBy({

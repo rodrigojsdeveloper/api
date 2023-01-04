@@ -1,5 +1,5 @@
-import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
 import { PropertiesServices } from "../services/properties.service";
+import { IProperty } from "../interfaces/property.interface";
 import { Request, Response } from "express";
 
 class PropertiesControllers {
@@ -38,7 +38,7 @@ class PropertiesControllers {
   async update(req: Request, res: Response) {
     const property_id: string = req.params.id;
 
-    const data: IPropertyUpdate = req.body;
+    const data: Partial<IProperty> = req.body;
 
     const updatedProperty = await new PropertiesServices().update(
       data,

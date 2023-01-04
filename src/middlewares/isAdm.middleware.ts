@@ -13,7 +13,7 @@ const isAdmMiddleware = async (
   if (!user?.is_adm) {
     return res
       .status(403)
-      .json({ message: "only admins can access this route" });
+      .json({ message: "Only admins can access this route" });
   }
 
   next();

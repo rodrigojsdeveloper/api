@@ -1,15 +1,9 @@
-import { IAddress, IAddressUpdate } from "./address.interface";
+import { IAddress } from "./address.interface";
 
 interface IProperty {
   value: number;
   size: number;
-  address: IAddress | object;
+  address: IAddress | object | Partial<IAddress>;
 }
 
-interface IPropertyUpdate {
-  value?: number;
-  size?: number;
-  address?: IAddressUpdate;
-}
-
-export { IProperty, IPropertyUpdate };
+export { IProperty };
