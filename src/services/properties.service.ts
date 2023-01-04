@@ -1,17 +1,22 @@
 import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
 import { propertyRepository } from "../repositories/property.repository";
+import { addressRepository } from "../repositories/address.repository";
 import { userRepository } from "../repositories/user.repository";
 import { NotFoundError } from "../errors/notFound.error";
 import { Property } from "../entities/property.entity";
 
 class PropertiesServices {
   async create(property: IProperty, email: string): Promise<Property> {
+    const newAddress = addressRepository.create(property.address);
+    await addressRepository.save(newAddress);
+
     const user = await userRepository.findOneBy({ email });
 
     const newProperty = new Property();
     newProperty.value = property.value;
     newProperty.size = property.size;
     newProperty.user = user!;
+    newProperty.address = newAddress;
     newProperty.schedules = [];
 
     propertyRepository.create(newProperty);
@@ -68,6 +73,7 @@ class PropertiesServices {
     propertyRepository.update(findProperty.id, {
       value: property.value ? property.value : findProperty.value,
       size: property.size ? property.size : findProperty.size,
+      address: property.address ? property.address : findProperty.address,
     });
 
     const updatedProperty = await propertyRepository.findOneBy({

@@ -3,7 +3,7 @@ import { IAddress, IAddressUpdate } from "./address.interface";
 interface IProperty {
   value: number;
   size: number;
-  address: IAddress;
+  address: IAddress | object;
 }
 
 interface IPropertyUpdate {
