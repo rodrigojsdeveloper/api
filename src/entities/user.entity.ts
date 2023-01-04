@@ -1,3 +1,4 @@
+import { Property } from "./property.entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,7 +7,6 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import { Property } from "./property.entity";
 
 @Entity("users")
 class User {

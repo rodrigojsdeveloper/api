@@ -1,3 +1,6 @@
+import { Schedule } from "./schedule.entity";
+import { Address } from "./address.entity";
+import { User } from "./user.entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,9 +10,8 @@ import {
   OneToMany,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from "typeorm";
-import { Schedule } from "./schedule.entity";
-import { User } from "./user.entity";
 
 @Entity("properties")
 class Property {
@@ -39,6 +41,12 @@ class Property {
   @ManyToOne(() => User, (user) => user.properties)
   @JoinColumn({ name: "user_id" })
   user: User;
+
+  @OneToOne((type) => Address, {
+    eager: true,
+  })
+  @JoinColumn()
+  address: Address;
 }
 
 export { Property };
