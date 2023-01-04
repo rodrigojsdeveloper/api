@@ -236,7 +236,17 @@
 													"users": {
 															"value": {
 																	"size": 2000,
-																	"value": 10000
+																	"value": 10000,
+																	"address": {
+																		"country": "United State",
+																		"state": "Califórnia",
+																		"city": "Mountain View",
+																		"district": "Amphitheatre Pkwy",
+																		"street": "Amphitheatre Pkwy",
+																		"number": 1600,
+																		"complement": "Googleplex",
+																		"zip_code": "94043"
+																	}
 															}
 													}
 											}
@@ -501,6 +511,35 @@
                   }
               }
           },
+					"Address": {
+						"type": "object",
+						"properties": {
+							"country": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"district": {
+								"type": "string"
+							},
+							"street": {
+								"type": "string"
+							},
+							"number": {
+								"type": "number"
+							},
+							"complement": {
+								"type": "string"
+							},
+							"zip_code": {
+								"type": "string"
+							}
+						}
+					},
           "Properties": {
               "type": "object",
               "properties": {
@@ -528,7 +567,11 @@
                   "user": {
                     "type": "object",
                     "$ref": "#/components/schemas/Users"
-                  }
+                  },
+									"address": {
+										"type": "object",
+										"$ref": "#/components/schemas/Address"
+									}
               }
           },
             "Schedules": {

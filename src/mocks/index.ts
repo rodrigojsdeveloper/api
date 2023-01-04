@@ -1,5 +1,6 @@
 import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
 import { ISchedule } from "../interfaces/schedule.interface";
+import { IAddress } from "../interfaces/address.interface";
 import { ILogin } from "../interfaces/login.interface";
 import { IUser } from "../interfaces/user.interface";
 
@@ -32,9 +33,21 @@ const schedule: ISchedule = {
   hour: "12:09",
 };
 
+const address: IAddress = {
+  country: "United State",
+  state: "Califórnia",
+  city: "Mountain View",
+  district: "Amphitheatre Pkwy",
+  street: "Amphitheatre Pkwy",
+  number: 1600,
+  complement: "Googleplex",
+  zip_code: "94043",
+};
+
 const property: IProperty = {
   size: 1000,
   value: 20000,
+  address,
 };
 
 const updatedProperty: IPropertyUpdate = {
