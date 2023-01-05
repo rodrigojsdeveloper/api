@@ -1,4 +1,4 @@
-import { IProperty, IPropertyUpdate } from "../interfaces/property.interface";
+import { IProperty } from "../interfaces/property.interface";
 import { ISchedule } from "../interfaces/schedule.interface";
 import { IAddress } from "../interfaces/address.interface";
 import { ILogin } from "../interfaces/login.interface";
@@ -50,7 +50,7 @@ const property: IProperty = {
   address,
 };
 
-const updatedProperty: IPropertyUpdate = {
+const updatedProperty: Partial<IProperty> = {
   value: 10000,
 };
 
