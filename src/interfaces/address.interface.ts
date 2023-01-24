@@ -6,7 +6,7 @@ interface IAddress {
   district: string;
   street: string;
   number: number;
-  complement: string;
+  complement?: string;
 }
 
 export { IAddress };

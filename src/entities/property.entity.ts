@@ -42,7 +42,7 @@ class Property {
   @JoinColumn({ name: "user_id" })
   user: User;
 
-  @OneToOne((type) => Address, {
+  @OneToOne(() => Address, {
     eager: true,
   })
   @JoinColumn()
