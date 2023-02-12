@@ -43,5 +43,5 @@ http://localhost:3000/docs
 ### Developer
 
 <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
-  <img src="./icon-linkedin.png" />
+  <img src="./icons8-linkedin.png" />
 </a>
