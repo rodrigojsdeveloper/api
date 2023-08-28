@@ -1,5 +1,5 @@
-import { UsersServices } from "../../services/users.service";
-import { LoginServices } from "../../services/login.service";
+import { UsersService } from "../../services/users.service";
+import { LoginService } from "../../services/login.service";
 import { AppDataSource } from "../../data-source";
 import { loginAdm, userAdm } from "../../mocks";
 import { DataSource } from "typeorm";
@@ -14,13 +14,13 @@ describe("Testing all login services", () => {
         console.error("Error during DataSource initialization", err)
       );
 
-    await new UsersServices().create(userAdm);
+    await new UsersService().create(userAdm);
   });
 
   afterAll(async () => await connection.destroy());
 
   it("Must be able to login", async () => {
-    const result = await new LoginServices().create(loginAdm);
+    const result = await new LoginService().create(loginAdm);
 
     expect(result).toHaveProperty("token");
   });

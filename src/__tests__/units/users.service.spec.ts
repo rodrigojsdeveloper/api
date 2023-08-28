@@ -1,4 +1,4 @@
-import { UsersServices } from "../../services/users.service";
+import { UsersService } from "../../services/users.service";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entity";
 import { userAdm } from "../../mocks";
@@ -15,7 +15,7 @@ describe("Testing all user services", () => {
         console.error("Error during DataSource initialization", err)
       );
 
-    createdUser = await new UsersServices().create(userAdm);
+    createdUser = await new UsersService().create(userAdm);
   });
 
   afterAll(async () => await connection.destroy());
@@ -33,13 +33,13 @@ describe("Testing all user services", () => {
   });
 
   it("Must be able to list user properties", async () => {
-    const result = await new UsersServices().listProperties(createdUser.id);
+    const result = await new UsersService().listProperties(createdUser.id);
 
     expect(result).toHaveProperty("map");
   });
 
   it("Must be able to deactive a user", async () => {
-    const result = await new UsersServices().deactivate(createdUser.id);
+    const result = await new UsersService().deactivate(createdUser.id);
 
     expect(result).toBeUndefined();
   });
