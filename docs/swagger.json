@@ -110,37 +110,37 @@
           "400": {
             "description": "Bad Request"
           },
-					"204": {
-						"description": "No Content"
-					}
+          "204": {
+            "description": "No Content"
+          }
         }
-      }
-    },
-    "patch": {
-      "summary": "Active a user",
-      "description": "This route will be responsible for activate user",
-      "tags": ["Users"],
-      "security": [{ "bearerAuth": [] }],
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "schema": {
-            "type": "string"
+      },
+      "patch": {
+        "summary": "Active a user",
+        "description": "This route will be responsible for activate user",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Activate user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Bad Request"
           },
-          "description": "Activate user",
-          "required": true
-        }
-      ],
-      "responses": {
-				"404": {
-					"description": "Bad Request"
-				},
-        "400": {
-          "description": "Bad Request"
-        },
-        "204": {
-          "description": "No Content"
+          "400": {
+            "description": "Bad Request"
+          },
+          "204": {
+            "description": "No Content"
+          }
         }
       }
     },

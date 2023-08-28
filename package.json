@@ -1,8 +1,8 @@
 {
-  "name": "full-nodejs-api",
+  "name": "api-nodejs",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:Rodrigodeveloperjr/full-nodejs-api.git",
+  "repository": "git@github.com:Rodrigodeveloperjr/api-nodejs.git",
   "author": "Rodrigodeveloperjr <rodrigojsdeveloper@gmail.com>",
   "license": "MIT",
   "scripts": {
