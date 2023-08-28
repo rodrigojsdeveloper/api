@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { LoginControllers } from "../controllers/login.controller";
+import { LoginController } from "../controllers/login.controller";
 
 const routes = Router();
 
 const loginRoutes = () => {
-  routes.post("", new LoginControllers().create);
+  routes.post("", new LoginController().create);
 
   return routes;
 };

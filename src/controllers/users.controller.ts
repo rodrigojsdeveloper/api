@@ -1,12 +1,12 @@
-import { UsersServices } from "../services/users.service";
+import { UsersService } from "../services/users.service";
 import { IUser } from "../interfaces/user.interface";
 import { Request, Response } from "express";
 
-class UsersControllers {
+class UsersController {
   async create(req: Request, res: Response) {
     const data: IUser = req.body;
 
-    const newUser = await new UsersServices().create(data);
+    const newUser = await new UsersService().create(data);
 
     return res.status(201).json(newUser);
   }
@@ -14,7 +14,7 @@ class UsersControllers {
   async listProperties(req: Request, res: Response) {
     const user_id: string = req.params.id;
 
-    const listProperties = await new UsersServices().listProperties(user_id);
+    const listProperties = await new UsersService().listProperties(user_id);
 
     return res.json(listProperties);
   }
@@ -22,10 +22,10 @@ class UsersControllers {
   async deactivate(req: Request, res: Response) {
     const user_id: string = req.params.id;
 
-    await new UsersServices().deactivate(user_id);
+    await new UsersService().deactivate(user_id);
 
     return res.status(204).json();
   }
 }
 
-export { UsersControllers };
+export { UsersController };

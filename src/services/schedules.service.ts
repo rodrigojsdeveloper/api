@@ -5,7 +5,7 @@ import { ISchedule } from "../interfaces/schedule.interface";
 import { NotFoundError } from "../errors/notFound.error";
 import { Schedule } from "../entities/schedule.entity";
 
-class SchedulesServices {
+class SchedulesService {
   async create(schedule: ISchedule, property_id: string): Promise<Schedule> {
     const property = await propertyRepository.findOneBy({ id: property_id });
 
@@ -67,4 +67,4 @@ class SchedulesServices {
   }
 }
 
-export { SchedulesServices };
+export { SchedulesService };

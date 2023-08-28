@@ -5,7 +5,7 @@ import { IProperty } from "../interfaces/property.interface";
 import { NotFoundError } from "../errors/notFound.error";
 import { Property } from "../entities/property.entity";
 
-class PropertiesServices {
+class PropertiesService {
   async create(property: IProperty, email: string): Promise<Property> {
     const newAddress = addressRepository.create(property.address);
     await addressRepository.save(newAddress);
@@ -95,4 +95,4 @@ class PropertiesServices {
   }
 }
 
-export { PropertiesServices };
+export { PropertiesService };

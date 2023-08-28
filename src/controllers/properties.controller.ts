@@ -1,20 +1,20 @@
-import { PropertiesServices } from "../services/properties.service";
+import { PropertiesService } from "../services/properties.service";
 import { IProperty } from "../interfaces/property.interface";
 import { Request, Response } from "express";
 
-class PropertiesControllers {
+class PropertiesController {
   async create(req: Request, res: Response) {
     const email: string = req.email;
 
     const data: IProperty = req.body;
 
-    const newProperty = await new PropertiesServices().create(data, email);
+    const newProperty = await new PropertiesService().create(data, email);
 
     return res.status(201).json(newProperty);
   }
 
   async list(req: Request, res: Response) {
-    const properties = await new PropertiesServices().list();
+    const properties = await new PropertiesService().list();
 
     return res.json(properties);
   }
@@ -22,7 +22,7 @@ class PropertiesControllers {
   async specific(req: Request, res: Response) {
     const property_id: string = req.params.id;
 
-    const property = await new PropertiesServices().specific(property_id);
+    const property = await new PropertiesService().specific(property_id);
 
     return res.json(property);
   }
@@ -30,7 +30,7 @@ class PropertiesControllers {
   async sale(req: Request, res: Response) {
     const property_id: string = req.params.id;
 
-    const property = await new PropertiesServices().sale(property_id);
+    const property = await new PropertiesService().sale(property_id);
 
     return res.json(property);
   }
@@ -40,7 +40,7 @@ class PropertiesControllers {
 
     const data: Partial<IProperty> = req.body;
 
-    const updatedProperty = await new PropertiesServices().update(
+    const updatedProperty = await new PropertiesService().update(
       data,
       property_id
     );
@@ -51,10 +51,10 @@ class PropertiesControllers {
   async delete(req: Request, res: Response) {
     const property_id: string = req.params.id;
 
-    await new PropertiesServices().delete(property_id);
+    await new PropertiesService().delete(property_id);
 
     return res.status(204).json();
   }
 }
 
-export { PropertiesControllers };
+export { PropertiesController };

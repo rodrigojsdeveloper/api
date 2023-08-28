@@ -6,7 +6,7 @@ import { IUser } from "../interfaces/user.interface";
 import { User } from "../entities/user.entity";
 import { hash } from "bcrypt";
 
-class UsersServices {
+class UsersService {
   async create(user: IUser): Promise<User> {
     if (await userRepository.findOneBy({ email: user.email })) {
       throw new BadRequestError("Email already exists");
@@ -55,4 +55,4 @@ class UsersServices {
   }
 }
 
-export { UsersServices };
+export { UsersService };

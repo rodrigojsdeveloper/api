@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
-class TermsControllers {
+class TermsController {
   terms(req: Request, res: Response) {
     return res.json({ message: "Terms and Services" });
   }
 }
 
-export { TermsControllers };
+export { TermsController };
