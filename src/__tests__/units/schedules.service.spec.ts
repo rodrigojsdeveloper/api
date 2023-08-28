@@ -8,7 +8,7 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entity";
 import { DataSource } from "typeorm";
 
-describe("Testing all user schedules", () => {
+describe("Testing all schedule services", () => {
   let connection: DataSource;
   let createdUser: User;
   let createdProperty: Property;

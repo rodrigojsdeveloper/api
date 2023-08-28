@@ -4,7 +4,7 @@ import { AppDataSource } from "../../data-source";
 import { loginAdm, userAdm } from "../../mocks";
 import { DataSource } from "typeorm";
 
-describe("Tests for login service", () => {
+describe("Testing all login services", () => {
   let connection: DataSource;
 
   beforeAll(async () => {

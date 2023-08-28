@@ -1,10 +1,10 @@
-import { loginAdm, loginNotAdm, userAdm } from "../../../mocks";
-import { AppDataSource } from "../../../data-source";
+import { loginAdm, loginNotAdm, userAdm } from "../../mocks";
+import { AppDataSource } from "../../data-source";
 import { DataSource } from "typeorm";
-import { app } from "../../../app";
+import { app } from "../../app";
 import request from "supertest";
 
-describe("Tests for login routes", () => {
+describe("Testing all login routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
