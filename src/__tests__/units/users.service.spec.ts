@@ -43,4 +43,10 @@ describe("Testing all user services", () => {
 
     expect(result).toBeUndefined();
   });
+
+  it("Must be able to active a user", async () => {
+    const result = await new UsersService().activate(createdUser.id);
+
+    expect(result).toBeUndefined();
+  });
 });

@@ -26,6 +26,14 @@ class UsersController {
 
     return res.status(204).json();
   }
+
+  async activate(req: Request, res: Response) {
+    const user_id: string = req.params.id;
+
+    await new UsersService().activate(user_id);
+
+    return res.status(204).json();
+  }
 }
 
 export { UsersController };

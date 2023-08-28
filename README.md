@@ -1,6 +1,6 @@
 # API
 
-This API is about creating properties and booking visits and buying properties.
+This API handles the creation of properties and reservation of visits or purchase.
 
 ## 1. Installing dependencies
 
@@ -9,6 +9,7 @@ In the root of the project, open the terminal and type
 ```
 yarn
 ```
+
 ## 2. Starting the API
 
 In the root of the project, open the terminal and type

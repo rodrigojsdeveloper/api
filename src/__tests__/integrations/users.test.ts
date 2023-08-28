@@ -1,5 +1,5 @@
 import { AppDataSource } from "../../data-source";
-import { userAdm } from "../../mocks";
+import { loginAdm, userAdm } from "../../mocks";
 import { DataSource } from "typeorm";
 import { app } from "../../app";
 import request from "supertest";
@@ -7,6 +7,8 @@ import request from "supertest";
 describe("Testing all user routes", () => {
   let connection: DataSource;
   let createdUser: any;
+  let login: any;
+  let token: string;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -16,6 +18,10 @@ describe("Testing all user routes", () => {
       );
 
     createdUser = await request(app).post("/users/signup").send(userAdm);
+
+    login = await request(app).post("/signin").send(loginAdm);
+
+    token = login.body.token;
   });
 
   afterAll(async () => await connection.destroy());
@@ -112,13 +118,37 @@ describe("Testing all user routes", () => {
   });
 
   test("Must be able to deactive user", async () => {
-    const response = await request(app).delete(`/users/${createdUser.body.id}`);
+    const response = await request(app)
+      .delete(`/users/${createdUser.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(204);
   });
 
+  test("Must prevent deactive a tokenless user", async () => {
+    const response = await request(app).delete(`/users/${createdUser.body.id}`);
+
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("message");
+  });
+
   test("Must prevent deactivate user with invalid id", async () => {
-    const response = await request(app).delete(
+    const response = await request(app)
+      .delete("/users/05a429c8-ca25-4007-8854-25c25f734167")
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty("message");
+  });
+
+  test("Must be able to active user", async () => {
+    const response = await request(app).patch(`/users/${createdUser.body.id}`);
+
+    expect(response.status).toBe(204);
+  });
+
+  test("Must prevent activate user with invalid id", async () => {
+    const response = await request(app).patch(
       "/users/05a429c8-ca25-4007-8854-25c25f734167"
     );
 

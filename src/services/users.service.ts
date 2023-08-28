@@ -53,6 +53,18 @@ class UsersService {
 
     await userRepository.save(user);
   }
+
+  async activate(user_id: string): Promise<void> {
+    const user = await userRepository.findOneBy({ id: user_id });
+
+    if (!user) {
+      throw new NotFoundError("User");
+    }
+
+    user.is_active = true;
+
+    await userRepository.save(user);
+  }
 }
 
 export { UsersService };

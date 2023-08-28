@@ -1,615 +1,645 @@
 {
   "openapi": "3.0.0",
   "info": {
-		"title": "API",
-		"description": "This API is about creating properties and booking visits or buying",
-		"termsOfService": "http://localhost:3000/terms",
-		"contact": {
-			"email": "rodrigojsdeveloper@gmail.com"
-		},
-		"version": "1.0.0"
+    "title": "API",
+    "description": "This API handles the creation of properties and reservation of visits or purchase",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "rodrigojsdeveloper@gmail.com"
+    },
+    "version": "1.0.0"
   },
   "servers": [
-		{
-			"url": "http://localhost:3000",
-			"description": "API"
-		}
+    {
+      "url": "http://localhost:3000",
+      "description": "API"
+    }
   ],
   "paths": {
-		"/users/signup": {
-			"post": {
-				"summary": "User registration",
-				"description": "This route will be responsible for registering the user",
-				"tags": [ "Users" ],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/Users"
-							},
-							"examples": {
-								"users": {
-									"value": {
-										"name": "johndoe",
-										"email": "johndoe@org.com",
-										"password": "Johndoe@123",
-										"is_adm": true
-									}
-								}
-							}
-						}
+    "/users/signup": {
+      "post": {
+        "summary": "User registration",
+        "description": "This route will be responsible for registering the user",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "users": {
+                  "value": {
+                    "name": "johndoe",
+                    "email": "johndoe@org.com",
+                    "password": "Johndoe@123",
+                    "is_adm": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "View a specific user",
+        "description": "This route will be responsible for view specific user",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "View specific user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deactive a user",
+        "description": "This route will be responsible for deactivate user",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Deactivate user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Bad Request"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+					"204": {
+						"description": "No Content"
 					}
+        }
+      }
+    },
+    "patch": {
+      "summary": "Active a user",
+      "description": "This route will be responsible for activate user",
+      "tags": ["Users"],
+      "security": [{ "bearerAuth": [] }],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "schema": {
+            "type": "string"
+          },
+          "description": "Activate user",
+          "required": true
+        }
+      ],
+      "responses": {
+				"404": {
+					"description": "Bad Request"
 				},
-				"responses": {
-					"400": {
-						"description": "Bad Request"
-					},
-					"201": {
-							"description": "Created",
-							"content": {
-								"application/json": {
-									"schema": {
-										"type": "object",
-										"$ref": "#/components/schemas/Users"
-									}
-								}
-							}
-						}
-					}
-				}
-		},
-		"/users/{id}": {
-				"get": {
-						"summary": "View a specific user",
-						"description": "This route will be responsible for view specific user",
-						"tags": [ "Users" ],
-						"security": [
-								{ "bearerAuth": [] }
-						],
-						"parameters": [{
-								"name": "id",
-								"in": "path",
-								"schema": {
-										"type": "string"
-								},
-								"description": "View specific user",
-								"required": true
-						}],
-						"responses": {
-								"400": {
-										"description": "Bad Request"
-								},
-								"200": {
-										"description": "OK"
-								}
-						}
-				},
-				"delete": {
-					"summary": "Deactive a user",
-					"description": "This route will be responsible for deactivate user",
-					"tags": [ "Users" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"parameters": [{
-							"name": "id",
-							"in": "path",
-							"schema": {
-									"type": "string"
-							},
-							"description": "Deactivate user",
-							"required": true
-					}],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"200": {
-									"description": "OK"
-							}
-					}
-			}
-		},
-		"/schedules/{id}": {
-				"post": {
-						"summary": "Create schedule",
-						"description": "This route will be responsible for create schedule",
-						"tags": [ "Schedules" ],
-						"security": [
-								{ "bearerAuth": [] }
-						],
-						"parameters": [{
-								"name": "id",
-								"in": "path",
-								"schema": {
-										"type": "string"
-								},
-								"description": "Id of property",
-								"required": true
-						}],
-						"requestBody": {
-								"content": {
-										"application/json": {
-												"schema": {
-														"$ref": "#/components/schemas/Schedules"
-												},
-												"examples": {
-														"transaction": {
-																"value": {
-																	"date": "02/01/2023",
-																	"hour": "15:00"
-																}
-														}
-												}
-										}
-								}
-						},
-						"responses": {
-								"400": {
-										"description": "Bad Request"
-								},
-								"201": {
-										"description": "Created",
-										"content": {
-												"application/json": {
-														"schema": {
-																"type": "object",
-																"$ref": "#/components/schemas/Schedules"
-														}
-												}
-										}
-								}
-						}
-				},
-				"get": {
-					"summary": "View specific schedule",
-					"description": "This route will be responsible for view specific schedule",
-					"tags": [ "Schedules" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"parameters": [{
-							"name": "id",
-							"in": "path",
-							"schema": {
-									"type": "string"
-							},
-							"description": "View specific schedule",
-							"required": true
-					}],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-								"description": "Unauthorized"
-							},
-							"200": {
-									"description": "OK"
-							}
-					}
-					},
-				"delete": {
-						"summary": "Delete schedule",
-						"description": "This route will be responsible for delete a schedule",
-						"tags": [ "Schedules" ],
-						"security": [
-								{ "bearerAuth": [] }
-						],
-						"parameters": [{
-								"name": "id",
-								"in": "path",
-								"schema": {
-										"type": "string"
-								},
-								"description": "Delete schedule",
-								"required": true
-						}],
-						"responses": {
-								"400": {
-										"description": "Bad Request"
-								},
-								"401": {
-									"description": "Unauthorized"
-								},
-								"200": {
-										"description": "OK"
-								}
-						}
-				}
-		},
-		"/properties": {
-			"post": {
-					"summary": "Create propery",
-					"description": "This route will be responsible for create property",
-					"tags": [ "Properties" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"requestBody": {
-							"content": {
-									"application/json": {
-											"schema": {
-													"$ref": "#/components/schemas/Properties"
-											},
-											"examples": {
-													"users": {
-															"value": {
-																	"size": 2000,
-																	"value": 10000,
-																	"address": {
-																		"country": "United State",
-																		"state": "Califórnia",
-																		"city": "Mountain View",
-																		"district": "Amphitheatre Pkwy",
-																		"street": "Amphitheatre Pkwy",
-																		"number": 1600,
-																		"complement": "Googleplex",
-																		"zip_code": "94043"
-																	}
-															}
-													}
-											}
-									}
-							}
-					},
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-									"description": "Unauthorized"
-							},
-							"403": {
-									"description": "Forbidden"
-							},
-							"201": {
-									"description": "Created",
-									"content": {
-											"application/json": {
-													"schema": {
-															"type": "object",
-															"$ref": "#/components/schemas/Properties"
-													}
-											}
-									}
-							}
-					}
-			},
-			"get": {
-					"summary": "List properties",
-					"description": "This route will be responsible for list properties",
-					"tags": [ "Properties" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-									"description": "Unauthorized"
-							},
-							"403": {
-									"description": "Forbidden"
-							},
-							"200": {
-									"description": "OK"
-							}
-					}
-			}
-	},
-		"/properties/{id}": {
-				"get": {
-						"summary": "Specific property",
-						"description": "This route will be responsible for showing a specific property",
-						"tags": [ "Properties" ],
-						"security": [
-								{ "bearerAuth": [] }
-						],
-						"parameters": [{
-								"name": "id",
-								"in": "path",
-								"schema": {
-										"type": "string"
-								},
-								"description": "View specific property",
-								"required": true
-						}],
-						"responses": {
-								"400": {
-										"description": "Bad Request"
-								},
-								"401": {
-										"description": "Unauthorized"
-								},
-								"200": {
-										"description": "OK",
-										"content": {
-												"application/json": {
-														"schema": {
-																"type": "object",
-																"$ref": "#/components/schemas/Properties"
-														}
-												}
-										}
-								}
-						}
-				},
-				"post": {
-					"summary": "Sale property",
-					"description": "This route will be responsible for sale property",
-					"tags": [ "Properties" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"parameters": [{
-							"name": "id",
-							"in": "path",
-							"schema": {
-									"type": "string"
-							},
-							"description": "Sale property",
-							"required": true
-					}],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-									"description": "Unauthorized"
-							},
-							"200": {
-									"description": "OK"
-							}
-					}
-			},
-			"patch": {
-					"summary": "Update property",
-					"description": "This route will be responsible for update property",
-					"tags": [ "Properties" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"parameters": [{
-							"name": "id",
-							"in": "path",
-							"schema": {
-									"type": "string"
-							},
-							"description": "Update property",
-							"required": true
-					}],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-									"description": "Unauthorized"
-							},
-							"403": {
-									"description": "Forbidden"
-							},
-							"200": {
-									"description": "OK",
-									"content": {
-											"application/json": {
-													"schema": {
-															"type": "object",
-															"$ref": "#/components/schemas/Properties"
-													}
-											}
-									}
-							}
-					}
-			},
-			"delete": {
-					"summary": "Specific account",
-					"description": "This route will be responsible for showing a specific account",
-					"tags": [ "Properties" ],
-					"security": [
-							{ "bearerAuth": [] }
-					],
-					"parameters": [{
-							"name": "id",
-							"in": "path",
-							"schema": {
-									"type": "string"
-							},
-							"description": "Delete property",
-							"required": true
-					}],
-					"responses": {
-							"400": {
-									"description": "Bad Request"
-							},
-							"401": {
-									"description": "Unauthorized"
-							},
-							"403": {
-									"description": "Forbidden"
-							},
-							"200": {
-									"description": "OK"
-							}
-					}
-			}
-		},
-		"/signin": {
-				"post": {
-						"summary": "Login",
-						"description": "This route will be responsible for login",
-						"tags": [ "Login" ],
-						
-						"requestBody": {
-								"content": {
-										"application/json": {
-												"schema": {
-														"$ref": "#/components/schemas/Users"
-												},
-												"examples": {
-														"user": {
-																"value": {
-																		"email": "johndoe@org.com",
-																		"password": "Johndoe@123"
-																}
-														}
-												}
-										}
-								}
-						},
-						"responses": {
-								"400": {
-										"description": "Bad Request"
-								},
-								"200": {
-										"description": "OK",
-										"content": {
-												"application/json": {
-														"schema": {
-																"type": "object",
-																"$ref": "#/components/schemas/Login"
-														}
-												}
-										}
-								}
-						}
-				}
-		}
+        "400": {
+          "description": "Bad Request"
+        },
+        "204": {
+          "description": "No Content"
+        }
+      }
+    },
+    "/schedules/{id}": {
+      "post": {
+        "summary": "Create schedule",
+        "description": "This route will be responsible for create schedule",
+        "tags": ["Schedules"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Id of property",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Schedules"
+              },
+              "examples": {
+                "transaction": {
+                  "value": {
+                    "date": "02/01/2023",
+                    "hour": "15:00"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Schedules"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "View specific schedule",
+        "description": "This route will be responsible for view specific schedule",
+        "tags": ["Schedules"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "View specific schedule",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete schedule",
+        "description": "This route will be responsible for delete a schedule",
+        "tags": ["Schedules"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Delete schedule",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/properties": {
+      "post": {
+        "summary": "Create propery",
+        "description": "This route will be responsible for create property",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Properties"
+              },
+              "examples": {
+                "users": {
+                  "value": {
+                    "size": 2000,
+                    "value": 10000,
+                    "address": {
+                      "country": "United State",
+                      "state": "Califórnia",
+                      "city": "Mountain View",
+                      "district": "Amphitheatre Pkwy",
+                      "street": "Amphitheatre Pkwy",
+                      "number": 1600,
+                      "complement": "Googleplex",
+                      "zip_code": "94043"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Properties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List properties",
+        "description": "This route will be responsible for list properties",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/properties/{id}": {
+      "get": {
+        "summary": "Specific property",
+        "description": "This route will be responsible for showing a specific property",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "View specific property",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Properties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Sale property",
+        "description": "This route will be responsible for sale property",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sale property",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update property",
+        "description": "This route will be responsible for update property",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Update property",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Properties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Specific account",
+        "description": "This route will be responsible for showing a specific account",
+        "tags": ["Properties"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Delete property",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "summary": "Login",
+        "description": "This route will be responsible for login",
+        "tags": ["Login"],
+
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "johndoe@org.com",
+                    "password": "Johndoe@123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Login"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "components": {
-      "schemas": {
-          "Users": {
-              "type": "object",
-              "properties": {
-                  "id": {
-                      "type": "string"
-                  },
-                  "name": {
-                      "type": "string"
-                  },
-                  "email": {
-                      "type": "string"
-                  },
-                  "password": {
-                      "type": "string"
-                  },
-                  "is_adm": {
-                      "type": "boolean"
-                  },
-                  "is_active": {
-                      "type": "boolean"
-                  },
-                  "created_at": {
-                      "type": "Date"
-                  },
-                  "updated_at": {
-                      "type": "Date"
-                  },
-                  "properties": {
-                    "type": "Array"
-                  }
-              }
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-					"Address": {
-						"type": "object",
-						"properties": {
-							"country": {
-								"type": "string"
-							},
-							"state": {
-								"type": "string"
-							},
-							"city": {
-								"type": "string"
-							},
-							"district": {
-								"type": "string"
-							},
-							"street": {
-								"type": "string"
-							},
-							"number": {
-								"type": "number"
-							},
-							"complement": {
-								"type": "string"
-							},
-							"zip_code": {
-								"type": "string"
-							}
-						}
-					},
-          "Properties": {
-              "type": "object",
-              "properties": {
-                  "id": {
-                      "type": "string"
-                  },
-                  "value": {
-                      "type":"string"
-                  },
-                  "size": {
-                      "type": "string"
-                  },
-                  "sold": {
-                      "type": "number"
-                  },
-                  "created_at": {
-                      "type": "Date"
-                  },
-                  "updated_at": {
-                      "type": "Date"
-                  },
-                  "schedules": {
-                    "type": "Array"
-                  },
-                  "user": {
-                    "type": "object",
-                    "$ref": "#/components/schemas/Users"
-                  },
-									"address": {
-										"type": "object",
-										"$ref": "#/components/schemas/Address"
-									}
-              }
+          "name": {
+            "type": "string"
           },
-            "Schedules": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "date": {
-                        "type": "string"
-                    },
-                    "hour": {
-                        "type": "string"
-                    },
-                    "created_at": {
-                        "type": "string"
-                    },
-                    "property": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/Properties"
-                    }
-                }
-            },
-          "Login": {
-              "type": "object",
-              "properties": {
-                  "token": {
-                      "type": "string"
-                  }
-              }
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "is_adm": {
+            "type": "boolean"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "Date"
+          },
+          "updated_at": {
+            "type": "Date"
+          },
+          "properties": {
+            "type": "Array"
           }
+        }
       },
-      "securitySchemes": {
-          "bearerAuth": {
-              "type": "http",
-              "scheme": "bearer",
-              "bearerFormat": "JWT"
+      "Address": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "number"
+          },
+          "complement": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
           }
+        }
+      },
+      "Properties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "sold": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "Date"
+          },
+          "updated_at": {
+            "type": "Date"
+          },
+          "schedules": {
+            "type": "Array"
+          },
+          "user": {
+            "type": "object",
+            "$ref": "#/components/schemas/Users"
+          },
+          "address": {
+            "type": "object",
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "Schedules": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "hour": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "property": {
+            "type": "object",
+            "$ref": "#/components/schemas/Properties"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
       }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
   }
 }
