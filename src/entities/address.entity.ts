@@ -36,7 +36,7 @@ class Address {
   @Column()
   complement: string;
 
-  @OneToOne(() => Property, {
+  @OneToOne((type) => Property, {
     eager: true,
   })
   @JoinColumn()

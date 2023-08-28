@@ -34,9 +34,7 @@ class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Property, (property) => property.user, {
-    eager: true,
-  })
+  @OneToMany((type) => Property, (property) => property.user)
   properties: Array<Property>;
 }
 

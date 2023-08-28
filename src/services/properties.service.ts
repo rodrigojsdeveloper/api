@@ -76,8 +76,9 @@ class PropertiesServices {
       address: property.address ? property.address : findProperty.address,
     });
 
-    const updatedProperty = await propertyRepository.findOneBy({
-      id: findProperty.id,
+    const updatedProperty = await propertyRepository.findOne({
+      where: { id: property_id },
+      relations: ["schedules"],
     });
 
     return updatedProperty!;

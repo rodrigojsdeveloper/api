@@ -29,8 +29,8 @@ const loginNotAdm: ILogin = {
 };
 
 const schedule: ISchedule = {
-  date: "02/01/2023",
-  hour: "12:09",
+  date: "28/08/2023",
+  hour: "16:00",
 };
 
 const address: IAddress = {

@@ -33,18 +33,13 @@ class Property {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Schedule, (schedule) => schedule.property, {
-    eager: true,
-  })
+  @OneToMany((type) => Schedule, (schedule) => schedule.property)
   schedules: Array<Schedule>;
 
-  @ManyToOne(() => User, (user) => user.properties)
-  @JoinColumn({ name: "user_id" })
+  @ManyToOne((type) => User, (user) => user.properties)
   user: User;
 
-  @OneToOne(() => Address, {
-    eager: true,
-  })
+  @OneToOne((type) => Address)
   @JoinColumn()
   address: Address;
 }

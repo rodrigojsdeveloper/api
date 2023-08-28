@@ -1,7 +1,7 @@
-import { UsersServices } from "../../../services/users.service";
-import { LoginServices } from "../../../services/login.service";
-import { AppDataSource } from "../../../data-source";
-import { loginAdm, userAdm } from "../../../mocks";
+import { UsersServices } from "../../services/users.service";
+import { LoginServices } from "../../services/login.service";
+import { AppDataSource } from "../../data-source";
+import { loginAdm, userAdm } from "../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for login service", () => {
