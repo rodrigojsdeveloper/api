@@ -1,11 +1,12 @@
 import { Router } from "express";
 
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
+import { isActiveMiddleware } from "../middlewares/isActive.middleware";
+import { tokenMiddleware } from "../middlewares/token.middleware";
 
 import { UsersController } from "../controllers/users.controller";
 
 import { userSchema } from "../schemas/user.schema";
-import { tokenMiddleware } from "../middlewares/token.middleware";
 
 const routes = Router();
 
@@ -16,9 +17,16 @@ const usersRoutes = (): Router => {
     new UsersController().create
   );
 
+  routes.get("/", new UsersController().list);
+
   routes.get("/:id", new UsersController().listProperties);
 
-  routes.delete("/:id", tokenMiddleware, new UsersController().deactivate);
+  routes.delete(
+    "/:id",
+    tokenMiddleware,
+    isActiveMiddleware,
+    new UsersController().deactivate
+  );
 
   routes.patch("/:id", new UsersController().activate);
 

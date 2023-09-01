@@ -9,13 +9,13 @@ import { usersRoutes } from "./user.routes";
 import SwaggerDocs from "../../docs/swagger.json";
 import SwaggerUi from "swagger-ui-express";
 
-const appRoutes = (app: Express): void => {
-  app.use("/users", usersRoutes());
-  app.use("/signin", loginRoutes());
-  app.use("/schedules", schedulesRoutes());
-  app.use("/properties", propertiesRoutes());
-  app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(SwaggerDocs));
-  app.use("/terms", termsRoutes());
+const appRoutes = (app: Express, endPoint: string): void => {
+  app.use(`/${endPoint}/users`, usersRoutes());
+  app.use(`/${endPoint}/signin`, loginRoutes());
+  app.use(`/${endPoint}/schedules`, schedulesRoutes());
+  app.use(`/${endPoint}/properties`, propertiesRoutes());
+  app.use(`/${endPoint}/docs`, SwaggerUi.serve, SwaggerUi.setup(SwaggerDocs));
+  app.use(`/${endPoint}/terms`, termsRoutes());
 };
 
 export { appRoutes };

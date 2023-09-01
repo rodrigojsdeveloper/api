@@ -29,6 +29,14 @@ class UsersService {
     return newUser;
   }
 
+  async list(): Promise<Array<IUser>> {
+    const users = await userRepository.find();
+
+    users.map((user) => Reflect.deleteProperty(user, "password"));
+
+    return users;
+  }
+
   async listProperties(user_id: string): Promise<Array<Property>> {
     const user = await userRepository.findOne({
       where: { id: user_id },

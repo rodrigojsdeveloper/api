@@ -17,19 +17,19 @@ describe("Testing all schedule routes", () => {
       .catch((err) =>
         console.error("Error during DataSource initialization", err)
       );
-    await request(app).post("/users/signup").send(userAdm);
+    await request(app).post("/api/users/signup").send(userAdm);
 
-    login = await request(app).post("/signin").send(loginAdm);
+    login = await request(app).post("/api/signin").send(loginAdm);
 
     token = login.body.token;
 
     createdProperty = await request(app)
-      .post("/properties")
+      .post("/api/properties")
       .send(property)
       .set("Authorization", `Bearer ${token}`);
 
     createdSchedule = await request(app)
-      .post(`/schedules/${createdProperty.body.id}`)
+      .post(`/api/schedules/${createdProperty.body.id}`)
       .send(schedule)
       .set("Authorization", `Bearer ${token}`);
   });
@@ -48,7 +48,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent creating a tokenless schedule", async () => {
     const response = await request(app)
-      .post(`/schedules/${createdSchedule.body.id}`)
+      .post(`/api/schedules/${createdSchedule.body.id}`)
       .send(schedule);
 
     expect(response.status).toBe(401);
@@ -57,7 +57,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent creating a schedule with invalid property id", async () => {
     const response = await request(app)
-      .post("/schedules/05a429c8-ca25-4007-8854-25c25f734167")
+      .post("/api/schedules/05a429c8-ca25-4007-8854-25c25f734167")
       .send(schedule)
       .set("Authorization", `Bearer ${token}`);
 
@@ -67,7 +67,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must be able to specific a schedule", async () => {
     const response = await request(app)
-      .get(`/schedules/${createdSchedule.body.id}`)
+      .get(`/api/schedules/${createdSchedule.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -81,7 +81,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent specified a tokenless schedule", async () => {
     const response = await request(app).get(
-      `/schedules/${createdSchedule.body.id}`
+      `/api/schedules/${createdSchedule.body.id}`
     );
 
     expect(response.status).toBe(401);
@@ -90,7 +90,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent specified a schedule with invalid property id", async () => {
     const response = await request(app)
-      .get("/schedules/999")
+      .get("/api/schedules/999")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);
@@ -99,7 +99,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must be able to delete a schedule", async () => {
     const response = await request(app)
-      .delete(`/schedules/${createdSchedule.body.id}`)
+      .delete(`/api/schedules/${createdSchedule.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(204);
@@ -107,7 +107,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent deletion a tokenless schedule", async () => {
     const response = await request(app).delete(
-      `/schedules/${createdSchedule.body.id}`
+      `/api/schedules/${createdSchedule.body.id}`
     );
 
     expect(response.status).toBe(401);
@@ -116,7 +116,7 @@ describe("Testing all schedule routes", () => {
 
   test("Must prevent deletion a schedule with invalid property id", async () => {
     const response = await request(app)
-      .delete("/schedules/99")
+      .delete("/api/schedules/99")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);

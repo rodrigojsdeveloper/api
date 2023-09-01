@@ -11,6 +11,12 @@ class UsersController {
     return res.status(201).json(newUser);
   }
 
+  async list(req: Request, res: Response) {
+    const users = await new UsersService().list();
+
+    return res.json(users);
+  }
+
   async listProperties(req: Request, res: Response) {
     const user_id: string = req.params.id;
 

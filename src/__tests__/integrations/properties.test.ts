@@ -24,15 +24,15 @@ describe("Testing all property routes", () => {
         console.error("Error during DataSource initialization", err)
       );
 
-    await request(app).post("/users/signup").send(userAdm);
-    await request(app).post("/users/signup").send(userNotAdm);
+    await request(app).post("/api/users/signup").send(userAdm);
+    await request(app).post("/api/users/signup").send(userNotAdm);
 
-    login = await request(app).post("/signin").send(loginAdm);
+    login = await request(app).post("/api/signin").send(loginAdm);
 
     token = login.body.token;
 
     createdProperty = await request(app)
-      .post("/properties")
+      .post("/api/properties")
       .send(property)
       .set("Authorization", `Bearer ${token}`);
   });
@@ -41,7 +41,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to create a property", async () => {
     const response = await request(app)
-      .post("/properties")
+      .post("/api/properties")
       .send(property)
       .set("Authorization", `Bearer ${token}`);
 
@@ -57,19 +57,19 @@ describe("Testing all property routes", () => {
   });
 
   test("Must prevent creating a tokenless property", async () => {
-    const response = await request(app).post("/properties").send(property);
+    const response = await request(app).post("/api/properties").send(property);
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
   });
 
   test("Must prevent the creation of a property with a user that is not admin", async () => {
-    const login = await request(app).post("/signin").send(loginNotAdm);
+    const login = await request(app).post("/api/signin").send(loginNotAdm);
 
     const token: string = login.body.token;
 
     const response = await request(app)
-      .post("/properties")
+      .post("/api/properties")
       .send(property)
       .set("Authorization", `Bearer ${token}`);
 
@@ -79,7 +79,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to list properties", async () => {
     const response = await request(app)
-      .get("/properties")
+      .get("/api/properties")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -87,7 +87,7 @@ describe("Testing all property routes", () => {
   });
 
   test("Must prevent listing a tokenless properties", async () => {
-    const response = await request(app).get("/properties");
+    const response = await request(app).get("/api/properties");
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
@@ -95,7 +95,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to specific a property", async () => {
     const response = await request(app)
-      .get(`/properties/${createdProperty.body.id}`)
+      .get(`/api/properties/${createdProperty.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -111,7 +111,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent specified a tokenless property", async () => {
     const response = await request(app).get(
-      `/properties/${createdProperty.body.id}`
+      `/api/properties/${createdProperty.body.id}`
     );
 
     expect(response.status).toBe(401);
@@ -120,7 +120,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent specified a property with invalid id", async () => {
     const response = await request(app)
-      .get("/properties/05a429c8-ca25-4007-8854-25c25f734167")
+      .get("/api/properties/05a429c8-ca25-4007-8854-25c25f734167")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);
@@ -129,7 +129,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to sale a property", async () => {
     const response = await request(app)
-      .post(`/properties/${createdProperty.body.id}`)
+      .post(`/api/properties/${createdProperty.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
@@ -140,7 +140,7 @@ describe("Testing all property routes", () => {
     createdProperty;
 
     const response = await request(app).post(
-      `/properties/${createdProperty.body.id}`
+      `/api/properties/${createdProperty.body.id}`
     );
 
     expect(response.status).toBe(401);
@@ -149,7 +149,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent sale a property with invalid id", async () => {
     const response = await request(app)
-      .post("/properties/05a429c8-ca25-4007-8854-25c25f734167")
+      .post("/api/properties/05a429c8-ca25-4007-8854-25c25f734167")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);
@@ -158,7 +158,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to update a property", async () => {
     const response = await request(app)
-      .patch(`/properties/${createdProperty.body.id}`)
+      .patch(`/api/properties/${createdProperty.body.id}`)
       .send(updatedProperty)
       .set("Authorization", `Bearer ${token}`);
 
@@ -175,7 +175,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent updation a tokenless property", async () => {
     const response = await request(app)
-      .patch(`/properties/${createdProperty.body.id}`)
+      .patch(`/api/properties/${createdProperty.body.id}`)
       .send(updatedProperty);
 
     expect(response.status).toBe(401);
@@ -183,12 +183,12 @@ describe("Testing all property routes", () => {
   });
 
   test("Must prevent the updation of a property with a user that is not admin", async () => {
-    const login = await request(app).post("/signin").send(loginNotAdm);
+    const login = await request(app).post("/api/signin").send(loginNotAdm);
 
     const token: string = login.body.token;
 
     const response = await request(app)
-      .patch(`/properties/${createdProperty.body.id}`)
+      .patch(`/api/properties/${createdProperty.body.id}`)
       .send(updatedProperty)
       .set("Authorization", `Bearer ${token}`);
 
@@ -198,7 +198,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent updation a property with invalid id", async () => {
     const response = await request(app)
-      .patch("/properties/05a429c8-ca25-4007-8854-25c25f734167")
+      .patch("/api/properties/05a429c8-ca25-4007-8854-25c25f734167")
       .send(updatedProperty)
       .set("Authorization", `Bearer ${token}`);
 
@@ -208,7 +208,7 @@ describe("Testing all property routes", () => {
 
   test("Must be able to delete a property", async () => {
     const response = await request(app)
-      .delete(`/properties/${createdProperty.body.id}`)
+      .delete(`/api/properties/${createdProperty.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(204);
@@ -216,7 +216,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent deletion of a tokenless property", async () => {
     const response = await request(app).delete(
-      `/properties/${createdProperty.body.id}`
+      `/api/properties/${createdProperty.body.id}`
     );
 
     expect(response.status).toBe(401);
@@ -224,12 +224,12 @@ describe("Testing all property routes", () => {
   });
 
   test("Must prevent the deletion of a property with a user that is not admin", async () => {
-    const login = await request(app).post("/signin").send(loginNotAdm);
+    const login = await request(app).post("/api/signin").send(loginNotAdm);
 
     const token: string = login.body.token;
 
     const response = await request(app)
-      .delete(`/properties/${createdProperty.body.id}`)
+      .delete(`/api/properties/${createdProperty.body.id}`)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(403);
@@ -238,7 +238,7 @@ describe("Testing all property routes", () => {
 
   test("Must prevent deletion a property with invalid id", async () => {
     const response = await request(app)
-      .delete("/properties/05a429c8-ca25-4007-8854-25c25f734167")
+      .delete("/api/properties/05a429c8-ca25-4007-8854-25c25f734167")
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);
