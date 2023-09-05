@@ -18,10 +18,23 @@ In the root of the project, open the terminal and type
 yarn dev
 ```
 
+### Request
+
+Request example - POST
+
+```
+{
+  "name": "johndoe",
+  "email": "johndoe@org.com",
+  "password": "Johndoe@123",
+  "is_adm": true
+}
+```
+
 ### Accessing API documentation
 
 ```
-http://localhost:3000/docs
+http://localhost:3000/api/docs
 ```
 
 ### Developer

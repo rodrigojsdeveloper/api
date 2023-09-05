@@ -7,6 +7,8 @@ import "dotenv/config";
 const app = express();
 app.use(express.json());
 
+app.disable("x-powered-by");
+
 appRoutes(app, "api");
 
 app.use(handleErrorMiddleware);

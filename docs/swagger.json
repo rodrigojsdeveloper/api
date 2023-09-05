@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/users/signup": {
+    "/api/users/signup": {
       "post": {
         "summary": "User registration",
         "description": "This route will be responsible for registering the user",
@@ -58,7 +58,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/api/users/{id}": {
       "get": {
         "summary": "View a specific user",
         "description": "This route will be responsible for view specific user",
@@ -144,7 +144,7 @@
         }
       }
     },
-    "/schedules/{id}": {
+    "/api/schedules/{id}": {
       "post": {
         "summary": "Create schedule",
         "description": "This route will be responsible for create schedule",
@@ -252,7 +252,7 @@
         }
       }
     },
-    "/properties": {
+    "/api/properties": {
       "post": {
         "summary": "Create propery",
         "description": "This route will be responsible for create property",
@@ -329,7 +329,7 @@
         }
       }
     },
-    "/properties/{id}": {
+    "/api/properties/{id}": {
       "get": {
         "summary": "Specific property",
         "description": "This route will be responsible for showing a specific property",
@@ -465,7 +465,7 @@
         }
       }
     },
-    "/signin": {
+    "/api/signin": {
       "post": {
         "summary": "Login",
         "description": "This route will be responsible for login",
