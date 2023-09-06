@@ -2,7 +2,6 @@ import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
 import { MainSeeder } from "./seeds/main.seeder";
 import path from "path";
-import "dotenv/config";
 
 const entitiesPath: string = path.join(__dirname, "./entities/*.{ts,js}");
 const migrationsPath: string = path.join(__dirname, "./migrations/*.{ts,js}");
