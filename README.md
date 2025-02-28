@@ -1,28 +1,45 @@
-# API
+<div align="center">
+  <h1>
+    API
+  </h1>
 
-This API handles the creation of properties and reservation of visits or purchase.
+  <p>This API handles the creation of properties and the reservation of visits or purchases.</p>
+</div>
+<br/>
 
-## 1. Installing dependencies
+## Cloning the Repository
 
-In the root of the project, open the terminal and type
+You can clone this repository using the following command:
+
+```
+git clone https://github.com/rodrigojsdeveloper/api.git
+```
+
+## Package Manager
+
+This project uses **Yarn** as its package manager. Make sure it is installed before proceeding.
+
+## Installing Dependencies
+
+To install the project dependencies, open the terminal in the root directory and run:
 
 ```
 yarn
 ```
 
-## 2. Starting the API
+## Starting the API
 
-In the root of the project, open the terminal and type
+To start the API, run the following command in the terminal:
 
 ```
 yarn dev
 ```
 
-### Request
+## API Request Example
 
-Request example - POST
+Example of a **POST** request:
 
-```
+```json
 {
   "name": "johndoe",
   "email": "johndoe@org.com",
@@ -31,19 +48,10 @@ Request example - POST
 }
 ```
 
-### Accessing API documentation
+### Accessing API Documentation
 
 ```
 http://localhost:3000/api/docs
 ```
 
-### Developer
-
-<div>
-  <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva" target="_blank">
-		<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white">
-	</a>
-	<a href="mailto:rodrigojsdeveloper@gmail.com" rel="noreferrer" target="_blank">
-	  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
-	</a>
-</div>
+<br/> <p align="center">Developed by <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">Rodrigo Silva</a></p>
